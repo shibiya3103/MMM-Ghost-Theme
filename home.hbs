@@ -1,0 +1,950 @@
+{{!< default}}
+
+{{!-- =========================================================
+     HERO
+     ========================================================= --}}
+
+<section class="hero">
+
+    {{#get
+        "posts"
+        filter="tag:hero-slider"
+        limit="5"
+        order="published_at desc"
+        as |slides|
+    }}
+
+        {{#if slides}}
+
+            <div class="hero-slider" id="heroSlider">
+
+                {{#foreach slides}}
+
+                    <article
+                        class="hero-slide{{#if @first}} is-active{{/if}}"
+                        data-slide-index="{{@index}}"
+                    >
+
+                        {{#if feature_image}}
+
+                            <div
+                                class="hero-slide-bg"
+                                style="background-image:url('{{img_url feature_image size="xl"}}')"
+                            ></div>
+
+                        {{/if}}
+
+                        <div class="hero-inner">
+
+                            <h1>
+                                {{title}}
+                            </h1>
+
+                            <p>
+
+                                {{#if custom_excerpt}}
+
+                                    {{custom_excerpt}}
+
+                                {{else}}
+
+                                    {{excerpt words="28"}}
+
+                                {{/if}}
+
+                            </p>
+
+                            <div class="hero-cta">
+
+                                <a
+                                    class="btn btn-accent"
+                                    href="{{@site.url}}/programs/"
+                                >
+                                    Learn More →
+                                </a>
+
+                                <a
+                                    class="btn btn-ghost hero-donate-btn"
+                                    href="{{@custom.donate_cta_url}}"
+                                >
+                                    Donate
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {{/foreach}}
+
+
+                <button
+                    class="hero-arrow hero-arrow-prev"
+                    id="heroPrev"
+                    type="button"
+                    aria-label="Previous slide"
+                >
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path
+                            d="M15 18l-6-6 6-6"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                    </svg>
+
+                </button>
+
+
+                <button
+                    class="hero-arrow hero-arrow-next"
+                    id="heroNext"
+                    type="button"
+                    aria-label="Next slide"
+                >
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path
+                            d="M9 6l6 6-6 6"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                    </svg>
+
+                </button>
+
+
+                <div class="hero-dots" id="heroDots">
+
+                    {{#foreach slides}}
+
+                        <button
+                            class="hero-dot{{#if @first}} is-active{{/if}}"
+                            type="button"
+                            data-slide-index="{{@index}}"
+                            aria-label="Go to slide {{@number}}"
+                        ></button>
+
+                    {{/foreach}}
+
+                </div>
+
+            </div>
+
+        {{/if}}
+
+    {{/get}}
+
+</section>
+
+
+
+{{!-- =========================================================
+     STAT RIBBON
+     ========================================================= --}}
+
+<section class="stat-ribbon">
+
+    <div class="wrap ribbon-grid">
+
+        <div class="ribbon-item">
+
+            <span
+                class="ribbon-num"
+                data-count="{{@custom.years_of_services}}"
+            >
+                0
+            </span>
+
+            <span class="ribbon-label">
+                Years of Service
+            </span>
+
+        </div>
+
+
+        <div class="ribbon-item">
+
+            <span
+                class="ribbon-num"
+                data-count="{{@custom.villages_reached}}"
+            >
+                0
+            </span>
+
+            <span class="ribbon-label">
+                Villages Reached
+            </span>
+
+        </div>
+
+
+        <div class="ribbon-item">
+
+            <span
+                class="ribbon-num"
+                data-count="{{@custom.mental_health_patients}}"
+            >
+                0
+            </span>
+
+            <span class="ribbon-label">
+                Mental Health Patients
+            </span>
+
+        </div>
+
+
+        <div class="ribbon-item">
+
+            <span
+                class="ribbon-num"
+                data-count="{{@custom.children_cared_for}}"
+            >
+                0
+            </span>
+
+            <span class="ribbon-label">
+                Children Cared For
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{{!-- =========================================================
+     WHO WE ARE
+     ========================================================= --}}
+
+<section class="section about">
+
+    <div class="wrap about-grid">
+
+
+        <div class="about-media">
+
+            {{#if @custom.about_image_1}}
+
+                <div class="about-image about-image-1">
+
+                    <img
+                        src="{{img_url @custom.about_image_1 size="m"}}"
+                        alt="{{@site.title}}"
+                    >
+
+                </div>
+
+            {{/if}}
+
+
+            {{#if @custom.about_image_2}}
+
+                <div class="about-image about-image-2">
+
+                    <img
+                        src="{{img_url @custom.about_image_2 size="m"}}"
+                        alt="{{@site.title}}"
+                    >
+
+                </div>
+
+            {{/if}}
+
+
+            {{#if @custom.about_image_3}}
+
+                <div class="about-image about-image-3">
+
+                    <img
+                        src="{{img_url @custom.about_image_3 size="m"}}"
+                        alt="{{@site.title}}"
+                    >
+
+                </div>
+
+            {{/if}}
+
+
+            <span class="about-badge">
+
+                <b>
+                    {{@custom.founded_year}}
+                </b>
+
+                <small>
+                    Serving since
+                </small>
+
+            </span>
+
+        </div>
+
+
+        <div class="about-body">
+
+            <span class="eyebrow">
+                Who We Are
+            </span>
+
+
+            {{#get
+                "pages"
+                filter="slug:who-we-are"
+                limit="1"
+                fields="title,slug,html,custom_excerpt,url"
+                as |who_page|
+            }}
+
+                {{#if who_page}}
+
+                    {{#foreach who_page}}
+
+                        <h2>
+                            {{title}}
+                        </h2>
+
+
+                        {{#if custom_excerpt}}
+
+                            <p class="lead">
+                                {{custom_excerpt}}
+                            </p>
+
+                        {{/if}}
+
+
+                        {{#if html}}
+
+                            <div class="about-content">
+                                {{{html}}}
+                            </div>
+
+                        {{/if}}
+
+
+                        <a
+                            class="btn btn-outline about-learn-more"
+                            href="{{@site.url}}/about/"
+                        >
+
+                            <span>
+                                Learn more about us
+                            </span>
+
+                            <span
+                                class="learn-arrow"
+                                aria-hidden="true"
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+                    {{/foreach}}
+
+                {{else}}
+
+                    <h2>
+                        A community of care across Morigaon, Assam
+                    </h2>
+
+                    <p class="lead">
+                        Empowering communities, securing futures
+                    </p>
+
+                    <a
+                        class="btn btn-outline about-learn-more"
+                        href="{{@site.url}}/about/"
+                    >
+
+                        <span>
+                            Learn more about us
+                        </span>
+
+                        <span
+                            class="learn-arrow"
+                            aria-hidden="true"
+                        >
+                            →
+                        </span>
+
+                    </a>
+
+                {{/if}}
+
+            {{/get}}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{{!-- =========================================================
+     PROGRAMMES / OUR INITIATIVES
+     ========================================================= --}}
+
+<section class="section programs">
+
+    <div class="wrap">
+
+        <div class="section-head">
+
+            <span class="eyebrow">
+                Our Initiatives
+            </span>
+
+            <h2>
+                What We Are <span>Doing</span>
+            </h2>
+
+            <p class="section-description">
+                For over four decades MMM has served the women and children
+                of Morigaon through focused, community-led programmes.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {{!-- =====================================================
+         ALL 5 PROGRAMMES
+         ===================================================== --}}
+
+    {{#get
+        "posts"
+        filter="tag:home-programs"
+        limit="5"
+        order="published_at desc"
+        as |programs|
+    }}
+
+        {{#if programs}}
+
+            <div class="wrap program-grid program-grid-all">
+
+                {{#foreach programs}}
+
+                    <a
+                        class="program-card"
+                        href="{{url}}"
+                    >
+
+                        {{!-- ==============================
+                             PROGRAMME IMAGE
+                             ============================== --}}
+
+                        {{#if feature_image}}
+
+                            <div class="program-media">
+
+                                <img
+                                    src="{{img_url feature_image size="l"}}"
+                                    alt="{{title}}"
+                                    loading="lazy"
+                                >
+
+                            </div>
+
+                        {{else}}
+
+                            <div class="program-media program-media-empty">
+
+                                <div class="program-image-placeholder">
+                                    <span>{{title}}</span>
+                                </div>
+
+                            </div>
+
+                        {{/if}}
+
+
+                        {{!-- ==============================
+                             PROGRAMME CONTENT
+                             ============================== --}}
+
+                        <div class="program-card-content">
+
+                            <h3>
+                                {{title}}
+                            </h3>
+
+                            {{#if custom_excerpt}}
+
+                                <p>
+                                    {{custom_excerpt}}
+                                </p>
+
+                            {{else}}
+
+                                <p>
+                                    {{excerpt words="18"}}
+                                </p>
+
+                            {{/if}}
+
+
+                            <span class="program-explore">
+
+                                <span>
+                                    Explore
+                                </span>
+
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                {{/foreach}}
+
+            </div>
+
+        {{/if}}
+
+    {{/get}}
+
+
+    {{!-- =====================================================
+         VIEW ALL PROGRAMMES
+         ===================================================== --}}
+
+    <div class="wrap center programs-view-all">
+
+        <a
+            class="btn btn-outline"
+            href="{{@site.url}}/programs/"
+        >
+            View All Programmes
+        </a>
+
+    </div>
+
+</section>
+
+
+
+{{!-- =========================================================
+     SOCIAL IMPACT
+     ========================================================= --}}
+
+<section class="section impact bg-soft">
+
+    <div class="wrap">
+
+        <div class="section-head">
+
+            <span class="eyebrow">
+                Social Impact
+            </span>
+
+            <h2>
+                The difference we have made
+            </h2>
+
+        </div>
+
+
+        <div class="impact-grid">
+
+
+            <div class="impact-cell">
+
+                <span
+                    class="impact-num"
+                    data-count="{{@custom.years_of_services}}"
+                >
+                    0
+                </span>
+
+                <span class="impact-label">
+                    Years of service
+                </span>
+
+            </div>
+
+
+            <div class="impact-cell">
+
+                <span
+                    class="impact-num"
+                    data-count="{{@custom.mental_health_patients}}"
+                >
+                    0
+                </span>
+
+                <span class="impact-label">
+                    Mental health patients enrolled
+                </span>
+
+            </div>
+
+
+            <div class="impact-cell">
+
+                <span
+                    class="impact-num"
+                    data-count="{{@custom.children_cared_for}}"
+                >
+                    0
+                </span>
+
+                <span class="impact-label">
+                    Children cared for &amp; placed
+                </span>
+
+            </div>
+
+
+            <div class="impact-cell">
+
+                <span
+                    class="impact-num"
+                    data-count="{{@custom.womens_self_help_groups}}"
+                >
+                    0
+                </span>
+
+                <span class="impact-label">
+                    Women's self-help groups
+                </span>
+
+            </div>
+
+
+            <div class="impact-cell">
+
+                <span
+                    class="impact-num"
+                    data-count="{{@custom.villages_reached}}"
+                >
+                    0
+                </span>
+
+                <span class="impact-label">
+                    Villages covered
+                </span>
+
+            </div>
+
+
+            <div class="impact-cell">
+
+                <span
+                    class="impact-num"
+                    data-count="{{@custom.flood_affected_households}}"
+                    data-suffix="+"
+                >
+                    0
+                </span>
+
+                <span class="impact-label">
+                    Flood-affected households reached
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="center">
+
+            <a
+                class="btn btn-outline impact-full-button"
+                href="{{@site.url}}/impact/"
+            >
+                See our full impact
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{{!-- =========================================================
+     STORIES OF TRANSFORMATION
+     ========================================================= --}}
+
+{{#get
+    "posts"
+    filter="tag:success-stories"
+    limit="3"
+    order="published_at desc"
+    as |stories|
+}}
+
+    {{#if stories}}
+
+        <section class="section stories-transform">
+
+            <div class="wrap">
+
+
+                <div class="stories-head">
+
+                    <div class="stories-heading">
+
+                        <span class="eyebrow">
+                            Real Lives, Real Change
+                        </span>
+
+                        <h2>
+                            Stories of transformation
+                        </h2>
+
+                    </div>
+
+
+                    <a
+                        class="stories-view-all"
+                        href="{{@site.url}}/tag/success-stories/"
+                    >
+
+                        <span>
+                            View all stories
+                        </span>
+
+                        <span aria-hidden="true">
+                            →
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <div class="stories-grid">
+
+                    {{#foreach stories}}
+
+                        <article class="story-card">
+
+
+                            {{#if feature_image}}
+
+                                <a
+                                    class="story-image"
+                                    href="{{url}}"
+                                    aria-label="Read {{title}}"
+                                >
+
+                                    <img
+                                        src="{{img_url feature_image size="m"}}"
+                                        alt="{{title}}"
+                                    >
+
+                                </a>
+
+                            {{else}}
+
+                                <a
+                                    class="story-image story-image-empty"
+                                    href="{{url}}"
+                                    aria-label="Read {{title}}"
+                                >
+
+                                    <span aria-hidden="true">
+                                        MM
+                                    </span>
+
+                                </a>
+
+                            {{/if}}
+
+
+                            <div class="story-card-body">
+
+                                <time
+                                    class="story-date"
+                                    datetime="{{date format="YYYY-MM-DD"}}"
+                                >
+                                    {{date format="DD MMM YYYY"}}
+                                </time>
+
+
+                                <h3 class="story-title">
+
+                                    <a href="{{url}}">
+                                        {{title}}
+                                    </a>
+
+                                </h3>
+
+
+                                <p class="story-excerpt">
+                                    {{excerpt words="28"}}
+                                </p>
+
+
+                                <a
+                                    class="story-read-more"
+                                    href="{{url}}"
+                                >
+
+                                    <span>
+                                        Read story
+                                    </span>
+
+                                    <span aria-hidden="true">
+                                        →
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                    {{/foreach}}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {{/if}}
+
+{{/get}}
+
+
+
+{{!-- =========================================================
+     TESTIMONIALS / VOICES FROM THE COMMUNITY
+     ========================================================= --}}
+
+{{#get
+    "posts"
+    filter="tag:home-testimonials"
+    limit="6"
+    order="published_at desc"
+    as |quotes|
+}}
+
+    {{#if quotes}}
+
+        <section class="section testimonials">
+
+            <div class="wrap">
+
+                <div class="testimonials-head">
+
+                    <span class="eyebrow">
+                        In Their Words
+                    </span>
+
+                    <h2>
+                        Voices from the community
+                    </h2>
+
+                </div>
+
+
+                <div class="quote-grid">
+
+                    {{#foreach quotes}}
+
+                        <article class="quote-card">
+
+                            <div
+                                class="quote-mark"
+                                aria-hidden="true"
+                            >
+                                ”
+                            </div>
+
+
+                            <blockquote>
+                                {{excerpt words="34"}}
+                            </blockquote>
+
+
+                            <div class="quote-person">
+
+                                {{#if feature_image}}
+
+                                    <img
+                                        src="{{img_url feature_image size="xs"}}"
+                                        alt="{{title}}"
+                                    >
+
+                                {{else}}
+
+                                    <span
+                                        class="quote-avatar-placeholder"
+                                        aria-hidden="true"
+                                    >
+
+                                        <svg
+                                            viewBox="0 0 24 24"
+                                            aria-hidden="true"
+                                        >
+
+                                            <circle
+                                                cx="12"
+                                                cy="8"
+                                                r="4"
+                                            ></circle>
+
+                                            <path
+                                                d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7"
+                                            ></path>
+
+                                        </svg>
+
+                                    </span>
+
+                                {{/if}}
+
+
+                                <strong>
+                                    {{title}}
+                                </strong>
+
+                            </div>
+
+                        </article>
+
+                    {{/foreach}}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {{/if}}
+
+{{/get}}
+
+
+
+{{!-- =========================================================
+     FINAL CTA
+     ========================================================= --}}
+
+{{> "cta"}}

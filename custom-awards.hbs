@@ -1,0 +1,443 @@
+{{!< default}}
+
+{{!-- =========================================================
+     AWARDS & RECOGNITION PAGE
+     Dynamic content from posts tagged: awards
+     ========================================================= --}}
+
+
+{{!-- =========================================================
+     HERO
+     ========================================================= --}}
+
+<header
+    class="awards-page-hero"
+    {{#if feature_image}}
+        style="background-image:url('{{img_url feature_image size="xl"}}')"
+    {{/if}}
+>
+
+    <div class="wrap awards-hero-inner">
+
+        <nav class="awards-breadcrumb" aria-label="Breadcrumb">
+
+            <a href="{{@site.url}}">
+                Home
+            </a>
+
+            <span aria-hidden="true">/</span>
+
+            <span>
+                {{title}}
+            </span>
+
+        </nav>
+
+
+        <h1>
+            {{title}}
+        </h1>
+
+
+        {{#if custom_excerpt}}
+
+            <p>
+                {{custom_excerpt}}
+            </p>
+
+        {{else}}
+
+            <p>
+                Recognised for dedicated service to the women and
+                children of Assam.
+            </p>
+
+        {{/if}}
+
+    </div>
+
+</header>
+
+
+
+{{!-- =========================================================
+     OPTIONAL PAGE CONTENT
+     ========================================================= --}}
+
+{{#if content}}
+
+<section class="awards-intro-section">
+
+    <div class="wrap awards-intro-wrap prose">
+
+        {{content}}
+
+    </div>
+
+</section>
+
+{{/if}}
+
+
+
+{{!-- =========================================================
+     AWARDS
+     All awards come from Ghost posts tagged "awards"
+     ========================================================= --}}
+
+{{#get
+    "posts"
+    filter="tag:awards"
+    limit="50"
+    order="published_at asc"
+    include="tags"
+    as |awards|
+}}
+
+    {{#if awards}}
+
+        <section class="awards-section">
+
+            <div class="wrap awards-wrap">
+
+
+                {{!-- ================= HEADING ================= --}}
+
+                <div class="awards-heading">
+
+                    <span class="awards-eyebrow">
+                        Recognition
+                    </span>
+
+                    <h2>
+                        Awards &amp; Recognitions
+                    </h2>
+
+                </div>
+
+
+
+                {{!-- ================= AWARDS SLIDER ================= --}}
+
+                <div class="awards-slider-wrapper">
+
+                    <div
+                        class="awards-slider"
+                        id="awards-slider"
+                        aria-label="Awards and recognitions"
+                    >
+
+                        {{#foreach awards}}
+
+                            <article class="award-card">
+
+
+                                {{!-- ================= IMAGE ================= --}}
+
+                                <div class="award-card-image">
+
+                                    {{#if feature_image}}
+
+                                        <img
+                                            src="{{img_url feature_image size="m"}}"
+                                            alt="{{title}}"
+                                            loading="lazy"
+                                        >
+
+                                    {{/if}}
+
+                                </div>
+
+
+
+                                {{!-- ================= CONTENT ================= --}}
+
+                                <div class="award-card-content">
+
+
+                                    {{!-- YEAR --}}
+
+                                    <span class="award-year">
+                                        {{date format="YYYY"}}
+                                    </span>
+
+
+                                    {{!-- TITLE --}}
+
+                                    <h3>
+                                        {{title}}
+                                    </h3>
+
+
+                                    {{!-- DESCRIPTION --}}
+
+                                    {{#if custom_excerpt}}
+
+                                        <p>
+                                            {{custom_excerpt}}
+                                        </p>
+
+                                    {{else}}
+
+                                        <p>
+                                            {{excerpt words="28"}}
+                                        </p>
+
+                                    {{/if}}
+
+
+                                </div>
+
+                            </article>
+
+                        {{/foreach}}
+
+                    </div>
+
+                </div>
+
+
+
+                {{!-- ================= SLIDER CONTROLS ================= --}}
+
+                <div class="awards-controls">
+
+                    <button
+                        class="awards-slider-button awards-prev"
+                        type="button"
+                        aria-label="Previous awards"
+                    >
+                        <span aria-hidden="true">‹</span>
+                    </button>
+
+
+                    <div
+                        class="awards-dots"
+                        aria-hidden="true"
+                    >
+
+                        <span class="awards-dot active"></span>
+                        <span class="awards-dot"></span>
+
+                    </div>
+
+
+                    <button
+                        class="awards-slider-button awards-next"
+                        type="button"
+                        aria-label="Next awards"
+                    >
+                        <span aria-hidden="true">›</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {{else}}
+
+        {{!-- ================= EMPTY STATE ================= --}}
+
+        <section class="awards-empty">
+
+            <div class="wrap">
+
+                <p>
+                    Awards and recognitions will be displayed here.
+                </p>
+
+            </div>
+
+        </section>
+
+    {{/if}}
+
+{{/get}}
+
+
+
+{{!-- =========================================================
+     FINAL CTA
+     ========================================================= --}}
+
+{{> "cta"}}
+
+
+
+{{!-- =========================================================
+     AWARDS SLIDER JAVASCRIPT
+     ========================================================= --}}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    var slider = document.getElementById("awards-slider");
+
+    if (!slider) {
+        return;
+    }
+
+
+    var nextButton = document.querySelector(".awards-next");
+
+    var prevButton = document.querySelector(".awards-prev");
+
+    var dots = document.querySelectorAll(".awards-dot");
+
+
+    /*
+     * Get the width of one card.
+     * The 18px is the gap between cards.
+     */
+
+    function getScrollAmount() {
+
+        var card = slider.querySelector(".award-card");
+
+        if (!card) {
+            return 0;
+        }
+
+        return card.offsetWidth + 18;
+
+    }
+
+
+    /*
+     * Update the active dot.
+     */
+
+    function updateDots() {
+
+        if (!dots.length) {
+            return;
+        }
+
+
+        var maxScroll =
+            slider.scrollWidth - slider.clientWidth;
+
+
+        if (maxScroll <= 0) {
+
+            dots.forEach(function (dot, index) {
+
+                dot.classList.toggle(
+                    "active",
+                    index === 0
+                );
+
+            });
+
+            return;
+        }
+
+
+        var progress =
+            slider.scrollLeft / maxScroll;
+
+
+        var activeIndex =
+            Math.round(
+                progress * (dots.length - 1)
+            );
+
+
+        dots.forEach(function (dot, index) {
+
+            dot.classList.toggle(
+                "active",
+                index === activeIndex
+            );
+
+        });
+
+    }
+
+
+    /*
+     * NEXT BUTTON
+     */
+
+    if (nextButton) {
+
+        nextButton.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+
+            var amount = getScrollAmount();
+
+
+            if (!amount) {
+                return;
+            }
+
+
+            slider.scrollBy({
+
+                left: amount,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+    }
+
+
+    /*
+     * PREVIOUS BUTTON
+     */
+
+    if (prevButton) {
+
+        prevButton.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+
+            var amount = getScrollAmount();
+
+
+            if (!amount) {
+                return;
+            }
+
+
+            slider.scrollBy({
+
+                left: -amount,
+
+                behavior: "smooth"
+
+            });
+
+        });
+
+    }
+
+
+    /*
+     * Watch slider movement
+     * and update the dots.
+     */
+
+    slider.addEventListener(
+        "scroll",
+        updateDots,
+        { passive: true }
+    );
+
+
+    /*
+     * Initial dot state.
+     */
+
+    updateDots();
+
+});
+</script>

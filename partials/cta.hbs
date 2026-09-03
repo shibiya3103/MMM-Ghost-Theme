@@ -1,0 +1,27 @@
+<section class="section cta">
+    <div class="wrap">
+        <div class="cta-card">
+            {{#get "posts" filter="tag:site-cta" limit="1" as |cta|}}
+            {{#if cta}}
+                {{#foreach cta}}
+                <h2>{{title}}</h2>
+                {{#if custom_excerpt}}<p>{{custom_excerpt}}</p>{{else}}{{#if excerpt}}<p>{{excerpt}}</p>{{/if}}{{/if}}
+                {{/foreach}}
+            {{else}}
+                <h2>Stand beside a woman, a child, a community.</h2>
+                <p>Every contribution helps us bring care, dignity and opportunity to the families of Morigaon. Join us in transforming lives.</p>
+            {{/if}}
+            {{/get}}
+
+            <div class="cta-actions">
+                <a class="btn btn-light" href="{{@custom.donate_cta_url}}">
+                    <svg class="heart-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21s-6.7-4.35-9.3-8.2C1 10.1 1.6 6.9 4.4 5.4c2.3-1.2 4.9-.4 6.2 1.6.4.6 1.1 1.5 1.4 2 .3-.5 1-1.4 1.4-2 1.3-2 3.9-2.8 6.2-1.6 2.8 1.5 3.4 4.7 1.7 7.4C18.7 16.65 12 21 12 21z"/>
+                    </svg>
+                    Donate Now
+                </a>
+                <a class="btn btn-ghost" href="{{@site.url}}/get-involved/">Get Involved</a>
+            </div>
+        </div>
+    </div>
+</section>

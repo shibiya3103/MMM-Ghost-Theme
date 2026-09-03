@@ -1,0 +1,136 @@
+<nav class="main-nav" aria-label="Main navigation">
+    <ul class="nav" id="primaryNavList">
+
+        {{#foreach @site.navigation}}
+            <li
+                class="nav-item nav-dynamic"
+                data-label="{{this.label}}"
+                data-url="{{this.url}}"
+            ></li>
+        {{/foreach}}
+
+    </ul>
+</nav>
+
+<script>
+(function () {
+    var list = document.getElementById('primaryNavList');
+    if (!list) return;
+
+    var items = Array.prototype.slice.call(
+        list.querySelectorAll('.nav-dynamic')
+    );
+
+    var groups = {};
+    var order = [];
+
+    items.forEach(function (li) {
+        var label = (li.getAttribute('data-label') || '').trim();
+        var url = li.getAttribute('data-url');
+
+        li.remove();
+
+        if (label.indexOf('/') > -1) {
+            var parts = label.split('/');
+            var groupName = parts[0].trim();
+            var childName = parts.slice(1).join('/').trim();
+
+            if (!groups[groupName]) {
+                groups[groupName] = [];
+                order.push({
+                    type: 'group',
+                    name: groupName
+                });
+            }
+
+            groups[groupName].push({
+                name: childName,
+                url: url
+            });
+
+        } else {
+            order.push({
+                type: 'link',
+                name: label,
+                url: url
+            });
+        }
+    });
+
+    order.forEach(function (entry) {
+        var li = document.createElement('li');
+
+        if (entry.type === 'link') {
+
+            li.className = 'nav-item';
+
+            li.innerHTML =
+                '<a class="nav-link" href="' +
+                entry.url +
+                '">' +
+                entry.name +
+                '</a>';
+
+        } else {
+
+            li.className = 'nav-item has-dropdown';
+
+            li.innerHTML =
+                '<button class="nav-link dropdown-toggle" type="button" aria-expanded="false">' +
+                    entry.name +
+                    ' <span class="caret" aria-hidden="true">▾</span>' +
+                '</button>' +
+
+                '<ul class="dropdown-menu">' +
+
+                    groups[entry.name].map(function (child) {
+                        return '<li><a href="' +
+                            child.url +
+                            '">' +
+                            child.name +
+                            '</a></li>';
+                    }).join('') +
+
+                '</ul>';
+        }
+
+        list.appendChild(li);
+    });
+
+    list.addEventListener('click', function (e) {
+        var toggle = e.target.closest('.dropdown-toggle');
+
+        if (!toggle) return;
+
+        var parentLi = toggle.closest('.has-dropdown');
+        var wasOpen = parentLi.classList.contains('is-open');
+
+        list.querySelectorAll('.has-dropdown.is-open')
+            .forEach(function (openLi) {
+                openLi.classList.remove('is-open');
+            });
+
+        if (!wasOpen) {
+            parentLi.classList.add('is-open');
+            toggle.setAttribute('aria-expanded', 'true');
+        } else {
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    var menuToggle = document.getElementById('menuToggle');
+    var headerBar = document.querySelector('.header-bar');
+
+    if (menuToggle && headerBar) {
+        menuToggle.addEventListener('click', function () {
+            var isOpen = headerBar.classList.toggle('is-open');
+
+            menuToggle.setAttribute(
+                'aria-expanded',
+                isOpen ? 'true' : 'false'
+            );
+        });
+    }
+
+})();
+</script>

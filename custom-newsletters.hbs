@@ -1,0 +1,230 @@
+{{!< default}}
+
+
+{{!-- =========================================================
+     NEWS & STORIES HERO
+     ========================================================= --}}
+
+<header class="news-page-hero">
+
+    <div class="wrap news-hero-inner">
+
+        <nav class="news-breadcrumb" aria-label="Breadcrumb">
+
+            <a href="{{@site.url}}">
+                Home
+            </a>
+
+            <span aria-hidden="true">/</span>
+
+            <span>
+                News &amp; Stories
+            </span>
+
+        </nav>
+
+
+        <h1>
+            News &amp; Stories
+        </h1>
+
+
+        <p>
+            {{#if custom_excerpt}}
+
+                {{custom_excerpt}}
+
+            {{else}}
+
+                Field notes, success stories and updates from
+                across Morigaon and Nagaon.
+
+            {{/if}}
+        </p>
+
+    </div>
+
+</header>
+
+
+
+{{!-- =========================================================
+     ALL STORIES
+
+     Shows:
+     1. news
+     2. our-stories
+
+     A post with BOTH tags is shown only once.
+     ========================================================= --}}
+
+{{#get
+    "posts"
+    filter="tag:news,tag:our-stories"
+    limit="50"
+    order="published_at desc"
+    include="tags"
+    as |stories|
+}}
+
+    {{#if stories}}
+
+        <section class="news-stories-section">
+
+            <div class="wrap news-stories-wrap">
+
+
+                {{!-- ================= HEADING ================= --}}
+
+                <div class="news-stories-heading">
+
+                    <span class="news-stories-eyebrow">
+                        Stories
+                    </span>
+
+                    <h2>
+                        All Stories
+                    </h2>
+
+                    <p>
+                        News, stories and updates from our work
+                        and the communities we serve.
+                    </p>
+
+                </div>
+
+
+
+                {{!-- ================= STORY GRID ================= --}}
+
+                <div class="news-stories-grid">
+
+                    {{#foreach stories}}
+
+                        <article class="news-story-card">
+
+
+                            {{!-- ================= IMAGE ================= --}}
+
+                            <a
+                                href="{{url}}"
+                                class="news-story-image"
+                                aria-label="{{title}}"
+                            >
+
+                                {{#if feature_image}}
+
+                                    <img
+                                        src="{{img_url feature_image size="l"}}"
+                                        alt="{{title}}"
+                                        loading="lazy"
+                                    >
+
+                                {{else}}
+
+                                    <div class="news-story-image-placeholder"></div>
+
+                                {{/if}}
+
+                            </a>
+
+
+
+                            {{!-- ================= CONTENT ================= --}}
+
+                            <div class="news-story-content">
+
+
+                                {{!-- DATE --}}
+
+                                <span class="news-story-date">
+
+                                    {{date format="DD MMM YYYY"}}
+
+                                </span>
+
+
+
+                                {{!-- TITLE --}}
+
+                                <h3>
+
+                                    <a href="{{url}}">
+                                        {{title}}
+                                    </a>
+
+                                </h3>
+
+
+
+                                {{!-- DESCRIPTION --}}
+
+                                {{#if custom_excerpt}}
+
+                                    <p>
+                                        {{custom_excerpt}}
+                                    </p>
+
+                                {{else}}
+
+                                    <p>
+                                        {{excerpt words="25"}}
+                                    </p>
+
+                                {{/if}}
+
+
+
+                                {{!-- READ STORY --}}
+
+                                <a
+                                    href="{{url}}"
+                                    class="news-story-link"
+                                >
+
+                                    Read story
+
+                                    <span aria-hidden="true">
+                                        →
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                    {{/foreach}}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    {{else}}
+
+        <section class="news-empty">
+
+            <div class="wrap">
+
+                <p>
+                    No news or stories published yet.
+                </p>
+
+            </div>
+
+        </section>
+
+    {{/if}}
+
+{{/get}}
+
+
+
+{{!-- =========================================================
+     FINAL CTA
+     ========================================================= --}}
+
+{{> "cta"}}

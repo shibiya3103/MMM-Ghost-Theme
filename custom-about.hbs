@@ -1,0 +1,143 @@
+{{!< default}}
+
+{{#get "pages" filter="slug:about" limit="1" as |aboutPage|}}
+
+    {{#foreach aboutPage}}
+
+        <header class="page-hero"
+            {{#if feature_image}}
+                style="background-image:url('{{img_url feature_image size="xl"}}')"
+            {{/if}}>
+
+            <div class="wrap">
+
+               <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{@site.url}}/">Home</a>
+    <span>/</span>
+    <span>{{title}}</span>
+</nav>
+
+                <h1>{{title}}</h1>
+
+                <p>
+                    {{#if custom_excerpt}}
+                        {{custom_excerpt}}
+                    {{else}}
+                        An organisation of compassion and action.
+                    {{/if}}
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <section class="section">
+
+            <div class="wrap about-split">
+
+                <div class="about-split-body">
+
+                    <span class="eyebrow">Who We Are</span>
+
+                    <div class="prose about-content">
+                        {{content}}
+                    </div>
+
+                   <a class="btn btn-accent" href="{{@site.url}}/programs/">
+    Our Programmes →
+</a>
+
+<a class="btn btn-impact" href="{{@site.url}}/impact/">
+    See Our Impact
+</a> 
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {{/foreach}}
+
+{{/get}}
+
+
+{{#get "posts" filter="tag:vmg" limit="3" order="published_at asc" as |vmg|}}
+
+    {{#if vmg}}
+
+        <section class="section mission-band">
+
+            <div class="wrap">
+
+                <span class="eyebrow eyebrow-light">
+                    What Drives Us
+                </span>
+
+                <h2>Vision, mission &amp; the goals that guide every step</h2>
+
+                <div class="mission-grid">
+
+                    {{#foreach vmg}}
+
+                        <article class="mission-card">
+
+                            <h3>{{title}}</h3>
+
+                            {{#if content}}
+                                {{content}}
+                            {{else}}
+                                <p>{{excerpt}}</p>
+                            {{/if}}
+
+                        </article>
+
+                    {{/foreach}}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {{/if}}
+
+{{/get}}
+
+
+{{#get "posts" filter="tag:home-stats" limit="4" order="published_at asc" as |stats|}}
+
+    {{#if stats}}
+
+        <section class="section stats bg-soft">
+
+            <div class="wrap">
+
+                <span class="eyebrow">By the Numbers</span>
+
+                <h2>Measurable change</h2>
+
+                <div class="stats-grid">
+
+                    {{#foreach stats}}
+
+                        <div class="stat-cell">
+                            <span class="stat-num">{{title}}</span>
+                            <span class="stat-label">{{excerpt}}</span>
+                        </div>
+
+                    {{/foreach}}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {{/if}}
+
+{{/get}}
+
+
+{{> "cta"}}

@@ -1,0 +1,360 @@
+{{!< default}}
+
+{{#post}}
+
+    {{!-- =========================================================
+         SUCCESS STORIES
+         ========================================================= --}}
+
+    {{#has tag="success-stories"}}
+
+        <article class="success-single-post">
+
+            <!-- =====================================================
+                 STORY HEADER
+                 ===================================================== -->
+
+            <header class="success-single-header">
+
+                <div class="success-single-header-inner">
+
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+
+                        <a href="{{@site.url}}/">
+                            Home
+                        </a>
+
+                        <span>/</span>
+
+                        <span>
+                            News &amp; Success Stories
+                        </span>
+
+                    </nav>
+
+                    <div class="success-single-label">
+                        SUCCESS STORIES
+                    </div>
+
+                    <h1 class="success-single-title">
+                        {{title}}
+                    </h1>
+
+                    {{#if custom_excerpt}}
+
+                        <p class="success-single-excerpt">
+                            {{custom_excerpt}}
+                        </p>
+
+                    {{else}}
+
+                        <p class="success-single-excerpt">
+                            {{excerpt words="45"}}
+                        </p>
+
+                    {{/if}}
+
+                    <div class="success-single-meta">
+
+                        {{#primary_author}}
+
+                            <span class="success-meta-author">
+                                {{name}}
+                            </span>
+
+                        {{/primary_author}}
+
+                        <span class="success-meta-date">
+                            {{date format="DD MMM YYYY"}}
+                        </span>
+
+                        <span class="success-meta-reading">
+                            {{reading_time}}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =====================================================
+                 FEATURE IMAGE
+                 ===================================================== -->
+
+            {{#if feature_image}}
+
+                <div class="success-single-feature">
+
+                    <img
+                        src="{{img_url feature_image size="xl"}}"
+                        alt="{{title}}"
+                    >
+
+                </div>
+
+            {{/if}}
+
+
+            <!-- =====================================================
+                 MAIN STORY CONTENT
+                 ===================================================== -->
+
+            <section class="success-single-content">
+
+                <div class="success-single-prose">
+
+                    {{content}}
+
+                </div>
+
+
+                <a
+                    class="success-story-tag-button"
+                    href="{{@site.url}}/tag/success-stories/"
+                >
+                    SUCCESS STORIES
+                </a>
+
+            </section>
+
+
+            <!-- =====================================================
+                 MORE STORIES
+                 ===================================================== -->
+
+            <section class="success-more-stories">
+
+                <div class="success-more-inner">
+
+                    <div class="success-more-heading">
+
+                        <span class="success-more-eyebrow">
+                            KEEP READING
+                        </span>
+
+                        <h2>
+                            More stories of change
+                        </h2>
+
+                    </div>
+
+
+                    {{#get
+                        "posts"
+                        filter="tag:success-stories+id:-{{id}}"
+                        limit="3"
+                        order="published_at desc"
+                        as |moreStories|
+                    }}
+
+                        {{#if moreStories}}
+
+                            <div class="success-more-grid">
+
+                                {{#foreach moreStories}}
+
+                                    <article class="success-more-card">
+
+                                        {{#if feature_image}}
+
+                                            <a
+                                                class="success-more-image"
+                                                href="{{url}}"
+                                                aria-label="Read {{title}}"
+                                            >
+
+                                                <img
+                                                    src="{{img_url feature_image size="m"}}"
+                                                    alt="{{title}}"
+                                                >
+
+                                            </a>
+
+                                        {{/if}}
+
+
+                                        <div class="success-more-body">
+
+                                            <time class="success-more-date">
+                                                {{date format="DD MMM YYYY"}}
+                                            </time>
+
+
+                                            <h3 class="success-more-title">
+
+                                                <a href="{{url}}">
+                                                    {{title}}
+                                                </a>
+
+                                            </h3>
+
+
+                                            <p class="success-more-excerpt">
+                                                {{excerpt words="28"}}
+                                            </p>
+
+
+                                            <a
+                                                class="success-more-read"
+                                                href="{{url}}"
+                                            >
+
+                                                <span>
+                                                    Read story
+                                                </span>
+
+                                                <span aria-hidden="true">
+                                                    →
+                                                </span>
+
+                                            </a>
+
+                                        </div>
+
+                                    </article>
+
+                                {{/foreach}}
+
+                            </div>
+
+                        {{/if}}
+
+                    {{/get}}
+
+                </div>
+
+            </section>
+
+        </article>
+
+
+    {{!-- =========================================================
+         PROGRAMMES / OUR INITIATIVES
+         ========================================================= --}}
+
+    {{else}}
+
+        <article class="program-single-post">
+
+
+            <!-- =====================================================
+                 PROGRAMME HERO
+                 ===================================================== -->
+
+            <header
+                class="program-single-header"
+                {{#if feature_image}}
+                    style="background-image:url('{{img_url feature_image size="xl"}}')"
+                {{/if}}
+            >
+
+                <div class="program-single-overlay"></div>
+
+                <div class="wrap program-single-header-inner">
+
+                    <nav
+                        class="breadcrumb program-breadcrumb"
+                        aria-label="Breadcrumb"
+                    >
+
+                        <a href="{{@site.url}}/">
+                            Home
+                        </a>
+
+                        <span>/</span>
+
+                        <a href="{{@site.url}}/programs/">
+                            Programmes
+                        </a>
+
+                        <span>/</span>
+
+                        <span>
+                            {{title}}
+                        </span>
+
+                    </nav>
+
+
+                    <h1 class="program-single-title">
+                        {{title}}
+                    </h1>
+
+
+                    <a
+                        class="btn btn-accent program-single-cta"
+                        href="{{@site.url}}/contact/"
+                    >
+                        Enquire / Get Support
+                        <span aria-hidden="true">
+                            →
+                        </span>
+                    </a>
+
+                </div>
+
+            </header>
+
+
+            <!-- =====================================================
+                 PROGRAMME CONTENT
+                 ===================================================== -->
+
+            <main class="section program-single-content">
+
+                <div class="wrap">
+
+                    <article class="program-single-prose">
+
+                        {{content}}
+
+                    </article>
+
+                </div>
+
+            </main>
+
+
+            <!-- =====================================================
+                 SUPPORT / CONTACT CARD
+                 ===================================================== -->
+
+            <section class="section programme-support">
+
+                <div class="wrap">
+
+                    <div class="enquire-band">
+
+                        <div class="enquire-band-content">
+
+                            <h3>
+                                Need support or want to refer someone?
+                            </h3>
+
+                            <p>
+                                Reach our team directly &mdash; we respond to every enquiry.
+                            </p>
+
+                        </div>
+
+                        <a
+                            class="btn btn-accent"
+                            href="{{@site.url}}/contact/"
+                        >
+                            Contact Us
+                            <span aria-hidden="true">→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </article>
+
+    {{/has}}
+
+{{/post}}

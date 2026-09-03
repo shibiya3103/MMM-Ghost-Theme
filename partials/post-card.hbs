@@ -1,0 +1,11 @@
+<article class="post-card">
+    <a href="{{url}}" class="post-card-media{{#unless feature_image}} is-empty{{/unless}}"
+        {{#if feature_image}}style="background-image:url('{{img_url feature_image size="m"}}')"{{/if}}>
+    </a>
+    <div class="post-card-body">
+        {{#primary_tag}}<span class="post-card-tag">{{name}}</span>{{/primary_tag}}
+        <h3><a href="{{url}}">{{title}}</a></h3>
+        <p>{{#if custom_excerpt}}{{custom_excerpt}}{{else}}{{excerpt words="20"}}{{/if}}</p>
+        <span class="post-card-date">{{date format="D MMM YYYY"}}</span>
+    </div>
+</article>

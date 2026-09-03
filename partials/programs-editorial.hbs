@@ -1,0 +1,22 @@
+{{#get "posts" filter="tag:home-programs" limit="12" order="published_at asc" as |programs|}}
+{{#if programs}}
+<section class="programs-editorial">
+    <div class="wrap">
+        {{#foreach programs}}
+        <article class="program-row">
+            <div class="program-row-text">
+                <span class="program-row-num">0{{@number}}</span>
+                {{#primary_tag}}<span class="eyebrow">{{name}}</span>{{/primary_tag}}
+                <h2>{{title}}</h2>
+                <p>{{#if custom_excerpt}}{{custom_excerpt}}{{else}}{{excerpt words="44"}}{{/if}}</p>
+                <a class="link-arrow" href="{{url}}">Explore &rarr;</a>
+            </div>
+            <div class="program-row-media"
+                {{#if feature_image}}style="background-image:url('{{img_url feature_image size="l"}}')"{{/if}}>
+            </div>
+        </article>
+        {{/foreach}}
+    </div>
+</section>
+{{/if}}
+{{/get}}

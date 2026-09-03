@@ -1,0 +1,109 @@
+{{!< default}}
+
+{{!-- =========================================================
+     PROGRAMME DETAIL HEADER
+     ========================================================= --}}
+
+<header
+    class="page-hero programme-detail-hero"
+    {{#if feature_image}}
+        style="background-image:url('{{img_url feature_image size="xl"}}')"
+    {{/if}}
+>
+    <div class="wrap">
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+
+            <a href="{{@site.url}}/">
+                Home
+            </a>
+
+            <span>/</span>
+
+            <a href="{{@site.url}}/programs/">
+                Programmes
+            </a>
+
+            <span>/</span>
+
+            <span>
+                {{title}}
+            </span>
+
+        </nav>
+
+        <h1>
+            {{title}}
+        </h1>
+
+        {{#if custom_excerpt}}
+            <p>
+                {{custom_excerpt}}
+            </p>
+        {{/if}}
+
+        <a
+            class="btn btn-accent"
+            href="{{@site.url}}/contact/"
+        >
+            Contact Us →
+        </a>
+
+    </div>
+</header>
+
+{{!-- =========================================================
+     FULL PROGRAMME DESCRIPTION
+     ========================================================= --}}
+
+<section class="section programme-detail-content">
+
+    <div class="wrap-narrow">
+
+        <div class="programme-accent-line"></div>
+
+        <div class="prose programme-prose">
+
+            {{content}}
+
+        </div>
+
+    </div>
+
+</section>
+
+{{!-- =========================================================
+     SUPPORT / CONTACT
+     ========================================================= --}}
+
+<section class="section programme-support">
+
+    <div class="wrap">
+
+        <div class="enquire-band">
+
+            <div class="enquire-band-content">
+
+                <h3>
+                    Need support or want to refer someone?
+                </h3>
+
+                <p>
+                    Reach our team directly &mdash; we respond to every enquiry.
+                </p>
+
+            </div>
+
+            <a
+                class="btn btn-accent"
+                href="{{@site.url}}/contact/"
+            >
+                Contact Us
+                <span aria-hidden="true">→</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

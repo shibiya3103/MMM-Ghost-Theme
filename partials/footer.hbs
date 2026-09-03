@@ -1,0 +1,272 @@
+<footer class="site-footer">
+
+    <div class="wrap footer-grid">
+
+
+        {{!-- =================================================
+             BRAND
+             ================================================= --}}
+
+        <div class="footer-brand">
+
+            {{#if @custom.logo}}
+
+                <div class="footer-logo-box">
+
+                    <img
+                        src="{{img_url @custom.logo size="s"}}"
+                        alt="{{@site.title}}"
+                    >
+
+                </div>
+
+            {{/if}}
+
+
+            <p class="footer-description">
+                Empowering the women and children of Morigaon, Assam
+                with dignity, opportunity and hope since 1979.
+            </p>
+
+
+            {{!-- FACEBOOK --}}
+
+            {{#if @site.facebook}}
+
+                <a
+                    class="footer-facebook"
+                    href="{{@site.facebook}}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M14 8h3V4h-3c-3.3 0-5 1.9-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"
+                        />
+
+                    </svg>
+
+                </a>
+
+            {{/if}}
+
+        </div>
+
+
+        {{!-- =================================================
+             EXPLORE
+             
+             Keep this manual for now.
+             ================================================= --}}
+
+        <div class="footer-col footer-explore">
+
+            <h4>Explore</h4>
+
+
+            <a href="{{@site.url}}/">
+                Home
+            </a>
+
+
+            <a href="{{@site.url}}/about/">
+                About Us
+            </a>
+
+
+            <a href="{{@site.url}}/programs/">
+                Programmes
+            </a>
+
+
+            <a href="{{@site.url}}/impact/">
+                Impact
+            </a>
+
+
+            <a href="{{@site.url}}/contact/">
+                Contact
+            </a>
+
+        </div>
+
+
+        {{!-- =================================================
+             PROGRAMMES
+             ================================================= --}}
+
+        {{#get
+            "posts"
+            filter="tag:home-programs"
+            limit="10"
+            order="published_at desc"
+            as |progs|
+        }}
+
+            {{#if progs}}
+
+                <div class="footer-col">
+
+                    <h4>Programmes</h4>
+
+
+                    {{#foreach progs}}
+
+                        <a href="{{url}}">
+                            {{title}}
+                        </a>
+
+                    {{/foreach}}
+
+                </div>
+
+            {{/if}}
+
+        {{/get}}
+
+
+        {{!-- =================================================
+             REACH US
+             ================================================= --}}
+
+        <div class="footer-col footer-contact">
+
+            <h4>Reach Us</h4>
+
+
+            {{!-- ADDRESS --}}
+
+            <div class="contact-item">
+
+                <span
+                    class="contact-icon"
+                    aria-hidden="true"
+                >
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"
+                        />
+
+                        <circle
+                            cx="12"
+                            cy="9"
+                            r="2.5"
+                        />
+
+                    </svg>
+
+                </span>
+
+
+                <span>
+
+                    Morigaon Civil Hospital Road,<br>
+                    Ward No. 7, PO: Morigaon, Dist.<br>
+                    Morigaon, Assam - 782105
+
+                </span>
+
+            </div>
+
+
+            {{!-- PHONE --}}
+
+            <div class="contact-item">
+
+                <span
+                    class="contact-icon"
+                    aria-hidden="true"
+                >
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M6.6 3.5l3 3.1-1.8 2.7c1 2.1 2.7 3.8 4.8 4.8l2.7-1.8 3.1 3c.6.6.7 1.5.2 2.2l-1.2 1.7c-.5.7-1.4 1-2.2.7-6.1-2-10.8-6.7-12.8-12.8-.3-.8 0-1.7.7-2.2L4.4 3.7c.7-.5 1.6-.4 2.2.2z"
+                        />
+
+                    </svg>
+
+                </span>
+
+
+                <a href="tel:+919435164216">
+                    +91 94351 64216
+                </a>
+
+            </div>
+
+
+            {{!-- EMAIL --}}
+
+            <div class="contact-item">
+
+                <span
+                    class="contact-icon"
+                    aria-hidden="true"
+                >
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect
+                            x="3"
+                            y="5"
+                            width="18"
+                            height="14"
+                            rx="2"
+                        />
+
+                        <path
+                            d="M3 7l9 6 9-6"
+                        />
+
+                    </svg>
+
+                </span>
+
+
+                <a href="mailto:mahilamehfil@yahoo.co.in">
+                    mahilamehfil@yahoo.co.in
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {{!-- =================================================
+         FOOTER BOTTOM
+         ================================================= --}}
+
+    <div class="footer-bar">
+
+        <div class="wrap footer-bar-inner">
+
+            <p>
+                &copy;
+                {{date format="YYYY"}}
+                {{@site.title}}.
+                All rights reserved.
+            </p>
+
+
+            <p>
+                Reg. No–126 of 1980–81
+                (Societies Act XXI of 1860)
+                · 12A · 80G · FCRA
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>

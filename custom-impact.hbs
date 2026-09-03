@@ -1,0 +1,504 @@
+{{!< default}}
+
+{{#get "pages" filter="slug:impact" limit="1" as |impactPage|}}
+
+    {{#foreach impactPage}}
+
+        <header class="page-hero"
+            {{#if feature_image}}
+                style="background-image:url('{{img_url feature_image size="xl"}}')"
+            {{/if}}>
+
+            <div class="wrap">
+                 <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{@site.url}}/">Home</a>
+    <span>/</span>
+    <span>Our Impact</span>
+</nav>
+                
+
+                <h1>{{title}}</h1>
+
+                <p>
+                    {{#if custom_excerpt}}
+                        {{custom_excerpt}}
+                    {{else}}
+                        Four decades of measurable change for the women and children of Morigaon.
+                    {{/if}}
+                </p>
+
+            </div>
+
+        </header>
+
+    {{/foreach}}
+
+{{/get}}
+
+{{!-- =========================================================
+     IMPACT NUMBERS
+     ========================================================= --}}
+
+<section class="section impact-stats-section">
+
+    <div class="wrap impact-count-grid">
+
+        <div class="impact-count">
+            <span
+                class="impact-num"
+                data-count="{{@custom.years_of_services}}"
+            >0</span>
+
+            <small>Years of service</small>
+        </div>
+
+
+        <div class="impact-count">
+            <span
+                class="impact-num"
+                data-count="{{@custom.mental_health_patients}}"
+            >0</span>
+
+            <small>Mental health patients enrolled</small>
+        </div>
+
+
+        <div class="impact-count">
+            <span
+                class="impact-num"
+                data-count="{{@custom.children_cared_for}}"
+            >0</span>
+
+            <small>Children cared for &amp; placed</small>
+        </div>
+
+
+        <div class="impact-count">
+            <span
+                class="impact-num"
+                data-count="{{@custom.womens_self_help_groups}}"
+            >0</span>
+
+            <small>Women's self-help groups</small>
+        </div>
+
+
+        <div class="impact-count">
+            <span
+                class="impact-num"
+                data-count="{{@custom.villages_reached}}"
+            >0</span>
+
+            <small>Villages covered</small>
+        </div>
+
+
+        <div class="impact-count">
+            <span
+                class="impact-num"
+                data-count="{{@custom.flood_affected_households}}"
+                data-plus="true"
+            >0</span>
+
+            <small>Flood-affected households reached</small>
+        </div>
+
+
+        <div class="impact-count">
+            <span
+                class="impact-num"
+                data-count="{{@custom.family_counselling_cases}}"
+            >0</span>
+
+            <small>Family counselling cases settled</small>
+        </div>
+
+
+        <div class="impact-count">
+            <span
+                class="impact-num"
+                data-count="{{@custom.dedicated_staff_volunteers}}"
+            >0</span>
+
+            <small>Dedicated staff &amp; volunteers</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+{{!-- =========================================================
+     IMPACT OVERVIEW
+     ========================================================= --}}
+
+{{#get "pages" slug="impact-overview" as |impact|}}
+
+    {{#if impact}}
+
+        {{#foreach impact}}
+
+            <section class="section">
+
+                <div class="wrap impact-overview-grid">
+
+                    <div class="impact-overview-media">
+
+                        {{#if feature_image}}
+                            <img
+                                src="{{img_url feature_image size="l"}}"
+                                alt="{{title}}"
+                            >
+                        {{/if}}
+
+                    </div>
+
+
+                    <div class="impact-overview-body">
+
+                        <span class="eyebrow">
+                            Our Impact
+                        </span>
+
+                        <h2>
+                            {{title}}
+                        </h2>
+
+                        <div class="prose">
+                            {{content}}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        {{/foreach}}
+
+    {{/if}}
+
+{{/get}}
+
+
+{{!-- =========================================================
+     PAGE CONTENT
+     ========================================================= --}}
+
+{{#if content}}
+
+    <section class="section bg-soft">
+
+        <div class="wrap-narrow prose">
+            {{content}}
+        </div>
+
+    </section>
+
+{{/if}}
+
+
+{{!-- =========================================================
+     STORIES OF TRANSFORMATION
+     ========================================================= --}}
+
+{{#get
+    "posts"
+    filter="tag:success-stories"
+    limit="12"
+    order="published_at desc"
+    as |stories|
+}}
+
+    {{#if stories}}
+
+        <section class="section stories-transform">
+
+            <div class="wrap">
+
+                <div class="stories-head">
+
+    <div class="stories-heading">
+
+        <span class="eyebrow">
+            Behind the Numbers
+        </span>
+
+        <h2>
+            Lives transformed
+        </h2>
+
+    </div>
+
+    <a class="stories-all-button" href="{{@site.url}}/tag/success-stories/">
+        <span>All stories</span>
+        <span aria-hidden="true">→</span>
+    </a>
+
+</div>
+
+
+                <div class="stories-grid">
+
+                    {{#foreach stories}}
+
+                        <article class="story-card">
+
+
+                            {{!-- STORY IMAGE --}}
+
+                            {{#if feature_image}}
+
+                                <a
+                                    class="story-image"
+                                    href="{{url}}"
+                                    aria-label="Read {{title}}"
+                                >
+
+                                    <img
+                                        src="{{img_url feature_image size="m"}}"
+                                        alt="{{title}}"
+                                    >
+
+                                </a>
+
+                            {{else}}
+
+                                <a
+                                    class="story-image story-image-empty"
+                                    href="{{url}}"
+                                    aria-label="Read {{title}}"
+                                >
+
+                                    <span aria-hidden="true">
+                                        MM
+                                    </span>
+
+                                </a>
+
+                            {{/if}}
+
+
+                            {{!-- STORY CONTENT --}}
+
+                            <div class="story-card-body">
+
+                                <time
+                                    class="story-date"
+                                    datetime="{{date format="YYYY-MM-DD"}}"
+                                >
+                                    {{date format="DD MMM YYYY"}}
+                                </time>
+
+
+                                <h3 class="story-title">
+
+                                    <a href="{{url}}">
+                                        {{title}}
+                                    </a>
+
+                                </h3>
+
+
+                                <p class="story-excerpt">
+                                    {{excerpt words="28"}}
+                                </p>
+
+
+                                <a
+                                    class="story-read-more"
+                                    href="{{url}}"
+                                >
+
+                                    <span>
+                                        Read story
+                                    </span>
+
+                                    <span aria-hidden="true">
+                                        →
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                    {{/foreach}}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {{/if}}
+
+{{/get}}
+
+
+{{!-- CTA --}}
+
+{{> "cta"}}
+
+
+{{!-- =========================================================
+     IMPACT NUMBER ANIMATION
+     ========================================================= --}}
+
+<script>
+
+(function () {
+
+    function startImpactCounters() {
+
+        const counters =
+            document.querySelectorAll('.impact-num');
+
+        if (!counters.length) {
+            return;
+        }
+
+
+        counters.forEach(function (counter) {
+
+            const target =
+                parseInt(counter.dataset.count, 10);
+
+            if (isNaN(target)) {
+                return;
+            }
+
+
+            const hasPlus =
+                counter.dataset.plus === 'true';
+
+
+            const duration = 1800;
+
+            const startTime =
+                performance.now();
+
+
+            counter.textContent = '0';
+
+
+            function update(currentTime) {
+
+                const elapsed =
+                    currentTime - startTime;
+
+
+                const progress =
+                    Math.min(
+                        elapsed / duration,
+                        1
+                    );
+
+
+                /*
+                 * Smooth ease-out effect
+                 */
+                const eased =
+                    1 - Math.pow(
+                        1 - progress,
+                        3
+                    );
+
+
+                const current =
+                    Math.floor(
+                        target * eased
+                    );
+
+
+                counter.textContent =
+                    current.toLocaleString('en-IN') +
+                    (hasPlus ? '+' : '');
+
+
+                if (progress < 1) {
+
+                    requestAnimationFrame(update);
+
+                } else {
+
+                    counter.textContent =
+                        target.toLocaleString('en-IN') +
+                        (hasPlus ? '+' : '');
+
+                }
+
+            }
+
+
+            requestAnimationFrame(update);
+
+        });
+
+    }
+
+
+    /*
+     * Start animation when the statistics
+     * section becomes visible.
+     */
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+
+            const statsSection =
+                document.querySelector(
+                    '.impact-stats-section'
+                );
+
+
+            if (!statsSection) {
+                return;
+            }
+
+
+            const observer =
+                new IntersectionObserver(
+                    function (entries, observer) {
+
+                        entries.forEach(
+                            function (entry) {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    startImpactCounters();
+
+
+                                    /*
+                                     * Stop observing after
+                                     * the animation starts.
+                                     */
+
+                                    observer.unobserve(
+                                        entry.target
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold: 0.25
+                    }
+                );
+
+
+            observer.observe(statsSection);
+
+        }
+    );
+
+})();
+
+</script>

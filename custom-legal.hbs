@@ -1,0 +1,220 @@
+{{!< default}}
+
+{{!-- =========================================================
+     LEGAL STATUS
+     One Ghost post controls the complete page content
+     ========================================================= --}}
+
+{{#get "posts"
+    filter="slug:legal-status"
+    limit="1"
+    as |legal_post|
+}}
+
+    {{#if legal_post}}
+
+        {{#foreach legal_post}}
+
+            {{!-- =================================================
+                 HERO
+                 ================================================= --}}
+
+            <header class="legal-status-hero">
+
+                <div class="wrap legal-hero-inner">
+
+                    <nav
+                        class="legal-breadcrumb"
+                        aria-label="Breadcrumb"
+                    >
+
+                        <a href="{{@site.url}}">
+                            Home
+                        </a>
+
+                        <span aria-hidden="true">
+                            /
+                        </span>
+
+                        <span>
+                            {{title}}
+                        </span>
+
+                    </nav>
+
+
+                    <h1>
+                        {{title}}
+                    </h1>
+
+
+                    {{#if custom_excerpt}}
+
+                        <p>
+                            {{custom_excerpt}}
+                        </p>
+
+                    {{else}}
+
+                        <p>
+                            Fully registered and compliant —
+                            established 1979, registered under
+                            the Societies Act in 1980.
+                        </p>
+
+                    {{/if}}
+
+                </div>
+
+            </header>
+
+
+            {{!-- =================================================
+                 REGISTRATIONS
+                 ================================================= --}}
+
+            <section class="legal-status-section">
+
+                <div class="wrap legal-status-wrap">
+
+                    <div class="legal-status-heading">
+
+                        <span class="eyebrow">
+                            Transparency
+                        </span>
+
+                        <h2>
+                            Registrations &amp; legal standing
+                        </h2>
+
+                    </div>
+
+
+                    {{!--
+                        THE ENTIRE BODY OF THE ONE GHOST POST
+                        IS DISPLAYED HERE.
+                    --}}
+
+                    {{#if html}}
+
+                        <div class="legal-post-content">
+
+                            {{{html}}}
+
+                        </div>
+
+                    {{else}}
+
+                        <div class="legal-empty">
+
+                            <p>
+                                Registration information is currently unavailable.
+                            </p>
+
+                        </div>
+
+                    {{/if}}
+
+
+                    <p class="legal-verification">
+
+                        For verification of any registration,
+                        please
+
+                        <a href="{{@site.url}}/contact/">
+                            contact us
+                        </a>.
+
+                    </p>
+
+                </div>
+
+            </section>
+
+        {{/foreach}}
+
+    {{else}}
+
+        {{!-- =================================================
+             FALLBACK
+             ================================================= --}}
+
+        <header class="legal-status-hero">
+
+            <div class="wrap legal-hero-inner">
+
+                <nav
+                    class="legal-breadcrumb"
+                    aria-label="Breadcrumb"
+                >
+
+                    <a href="{{@site.url}}">
+                        Home
+                    </a>
+
+                    <span aria-hidden="true">
+                        /
+                    </span>
+
+                    <span>
+                        Legal Status
+                    </span>
+
+                </nav>
+
+
+                <h1>
+                    Legal Status
+                </h1>
+
+
+                <p>
+                    Fully registered and compliant —
+                    established 1979, registered under
+                    the Societies Act in 1980.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <section class="legal-status-section">
+
+            <div class="wrap legal-status-wrap">
+
+                <div class="legal-status-heading">
+
+                    <span class="eyebrow">
+                        Transparency
+                    </span>
+
+                    <h2>
+                        Registrations &amp; legal standing
+                    </h2>
+
+                </div>
+
+
+                <div class="legal-empty">
+
+                    <p>
+                        Legal registration information is currently unavailable.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    {{/if}}
+
+{{/get}}
+
+
+{{!-- =========================================================
+     CTA
+     ========================================================= --}}
+
+{{> "cta"}}

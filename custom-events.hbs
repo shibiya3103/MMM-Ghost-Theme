@@ -1,0 +1,61 @@
+{{!< default}}
+
+<header class="page-hero page-hero-grad">
+    <div class="wrap">
+        <nav class="breadcrumb"><a href="{{@site.url}}">Home</a> / {{title}}</nav>
+        <h1>{{title}}</h1>
+        <p>{{#if custom_excerpt}}{{custom_excerpt}}{{else}}Upcoming and recent events and community gatherings.{{/if}}</p>
+    </div>
+</header>
+
+{{#if content}}<section class="section"><div class="wrap-narrow prose">{{content}}</div></section>{{/if}}
+
+{{#get "posts" filter="tag:event" limit="12" order="published_at asc" as |upcoming|}}
+{{#if upcoming}}
+<section class="section">
+    <div class="wrap">
+        <span class="eyebrow">Mark Your Calendar</span>
+        <h2>Upcoming Events</h2>
+        <div class="event-grid">
+            {{#foreach upcoming}}
+            <article class="event-card">
+                <div class="event-media" {{#if feature_image}}style="background-image:url('{{img_url feature_image size="m"}}')"{{/if}}>
+                    <span class="event-date">{{date format="DD MMM"}}</span>
+                </div>
+                {{#primary_tag}}<span class="pill">{{name}}</span>{{/primary_tag}}
+                <h4>{{title}}</h4>
+                <p>{{excerpt words="20"}}</p>
+                <a href="{{url}}" class="link-arrow">View details</a>
+            </article>
+            {{/foreach}}
+        </div>
+    </div>
+</section>
+{{else}}
+<section class="section"><div class="wrap"><p class="empty-note">No events right now. Check back soon.</p></div></section>
+{{/if}}
+{{/get}}
+
+{{#get "posts" filter="tag:event" limit="12" order="published_at desc" as |past|}}
+{{#if past}}
+<section class="section bg-soft">
+    <div class="wrap">
+        <span class="eyebrow">Archive</span>
+        <h2>Past Events</h2>
+        <div class="event-grid">
+            {{#foreach past}}
+            <article class="event-card is-past">
+                <div class="event-media" {{#if feature_image}}style="background-image:url('{{img_url feature_image size="m"}}')"{{/if}}>
+                    <span class="event-date">{{date format="DD MMM YYYY"}}</span>
+                </div>
+                <h4>{{title}}</h4>
+                <p>{{excerpt words="20"}}</p>
+            </article>
+            {{/foreach}}
+        </div>
+    </div>
+</section>
+{{/if}}
+{{/get}}
+
+{{> "cta"}}

@@ -1,0 +1,280 @@
+{{!< default}}
+
+<header class="page-hero page-hero-grad">
+    <div class="wrap">
+        <nav class="breadcrumb"><a href="{{@site.url}}">Home</a> / {{title}}</nav>
+        <h1>{{title}}</h1>
+        {{#if custom_excerpt}}<p>{{custom_excerpt}}</p>{{else}}<p>Your generosity helps us stand beside the community.</p>{{/if}}
+    </div>
+</header>
+
+{{!-- ONE POST, tagged "donate-grid", holding the 3 images + any text content --}}
+{{#get "posts" filter="tag:donate-grid" limit="1" as |grid|}}
+{{#if grid}}
+{{#foreach grid}}
+<section class="donate-collage">
+    <div class="donate-collage-post">
+        {{content}}
+    </div>
+</section>
+{{/foreach}}
+{{/if}}
+{{/get}}
+
+{{!-- STATS BAND — tag posts "stats", post title = the big number, excerpt = the label --}}
+{{#get "posts" filter="tag:stats" limit="6" order="published_at asc" as |stats|}}
+{{#if stats}}
+<section class="donate-stats-band">
+    {{#foreach stats}}
+    <div class="stat-block">
+        <div class="stat-number">{{title}}</div>
+        <div class="stat-label">{{excerpt words="6"}}</div>
+    </div>
+    {{/foreach}}
+</section>
+{{/if}}
+{{/get}}
+
+{{!-- GALLERY STACK CAROUSEL — colors static, content dynamic from posts tagged "gallery" --}}
+{{#get "posts" filter="tag:gallery" limit="9" order="published_at desc" as |gallery|}}
+{{#if gallery}}
+<section class="section bg-soft">
+    <div class="wrap">
+        <p class="eyebrow">Gallery</p>
+        <h2>Moments from Our Community</h2>
+        <p>Every photo is a life touched — see the difference your support makes.</p>
+
+        <div class="stack-carousel" id="galleryStack">
+            <button class="stack-arrow stack-prev" aria-label="Previous">&#8249;</button>
+            <div class="stack-track">
+                {{#foreach gallery}}
+                <div class="stack-card">
+                    <h3>{{title}}</h3>
+                    <p>{{excerpt words="20"}}</p>
+                </div>
+                {{/foreach}}
+            </div>
+            <button class="stack-arrow stack-next" aria-label="Next">&#8250;</button>
+        </div>
+    </div>
+</section>
+{{/if}}
+{{/get}}
+
+<section class="section">
+    <div class="wrap donate-grid">
+        <div class="donate-main">
+            {{#if content}}<div class="prose">{{content}}</div>{{/if}}
+        </div>
+        <aside class="donate-side">
+            {{#if feature_image}}<img class="donate-qr" src="{{img_url feature_image size="m"}}" alt="Donation QR code">{{/if}}
+            {{#get "pages" slug="donate-tiers" as |tiers|}}
+                {{#if tiers}}{{#foreach tiers}}<div class="prose">{{content}}</div>{{/foreach}}{{/if}}
+            {{/get}}
+            <a class="btn btn-accent btn-block" href="{{@custom.donate_cta_url}}">Donate Online</a>
+        </aside>
+    </div>
+</section>
+
+{{> "cta"}}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var stack = document.getElementById('galleryStack');
+    if (!stack) return;
+
+    var track = stack.querySelector('.stack-track');
+    var cards = Array.prototype.slice.call(track.children);
+    var current = 0;
+
+    function render() {
+        cards.forEach(function (card, i) {
+            card.classList.remove('is-active', 'is-prev', 'is-next', 'is-far-prev', 'is-far-next');
+            var diff = i - current;
+            if (diff === 0) card.classList.add('is-active');
+            else if (diff === -1) card.classList.add('is-prev');
+            else if (diff === 1) card.classList.add('is-next');
+            else if (diff < -1) card.classList.add('is-far-prev');
+            else card.classList.add('is-far-next');
+        });
+    }
+
+    stack.querySelector('.stack-prev').addEventListener('click', function () {
+        current = (current - 1 + cards.length) % cards.length;
+        render();
+    });
+    stack.querySelector('.stack-next').addEventListener('click', function () {
+        current = (current + 1) % cards.length;
+        render();
+    });
+
+    render();
+});
+</script>
+<style>
+/* ================= IMAGE COLLAGE ================= */
+.donate-collage {
+    padding: 48px 24px 0;
+}
+.donate-collage-post {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.donate-collage-post figure.kg-image-card {
+    margin: 0 !important;
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 0 0 auto;
+}
+.donate-collage-post figure.kg-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.donate-collage-post figure.kg-image-card:nth-of-type(1) {
+    width: 33%;
+    aspect-ratio: 3 / 4.3;
+}
+.donate-collage-post figure.kg-image-card:nth-of-type(2) {
+    width: 24%;
+    aspect-ratio: 3 / 4;
+    margin-top: 45px !important;
+}
+.donate-collage-post figure.kg-image-card:nth-of-type(3) {
+    width: 24%;
+    aspect-ratio: 3 / 4;
+}
+.donate-collage-post > p,
+.donate-collage-post > h1,
+.donate-collage-post > h2,
+.donate-collage-post > h3 {
+    flex: 1 0 100%;
+    margin-top: 24px;
+}
+@media (max-width: 760px) {
+    .donate-collage-post figure.kg-image-card:nth-of-type(1),
+    .donate-collage-post figure.kg-image-card:nth-of-type(2),
+    .donate-collage-post figure.kg-image-card:nth-of-type(3) {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        margin-top: 0 !important;
+    }
+}
+
+/* ================= STATS BAND ================= */
+.donate-stats-band {
+    max-width: 1100px;
+    margin: 48px auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    border-radius: 10px;
+    overflow: hidden;
+}
+.stat-block {
+    padding: 44px 24px;
+    text-align: center;
+    color: #fff;
+}
+.stat-block:nth-child(odd)  { background: #1b3f8b; } /* blue */
+.stat-block:nth-child(even) { background: #2f7a45; } /* green */
+.stat-number {
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+.stat-label {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* ================= GALLERY CARDS (static colors, dynamic content) ================= */
+.gallery-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 4px;
+    scroll-snap-type: x mandatory;
+}
+.gallery-card {
+    flex: 0 0 240px;
+    min-height: 320px;
+    border-radius: 14px;
+    padding: 28px 22px;
+    color: #fff;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.gallery-card h3 {
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+}
+.gallery-card p {
+    font-size: 0.9rem;
+    opacity: 0.92;
+    margin: 0;
+}
+.gallery-card:nth-child(4n+1) { background: #4472c4; } /* blue */
+.gallery-card:nth-child(4n+2) { background: #2f7a45; } /* green */
+.gallery-card:nth-child(4n+3) { background: #b5482f; } /* red/terracotta */
+.gallery-card:nth-child(4n+4) { background: #d4a017; } /* gold */
+/* ================= GALLERY STACK CAROUSEL ================= */
+.stack-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0 60px;
+}
+.stack-track {
+    position: relative;
+    width: 320px;
+    height: 420px;
+}
+.stack-card {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 16px;
+    padding: 32px 24px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.stack-card h3 { font-size: 1.2rem; margin: 0 0 8px; }
+.stack-card p  { font-size: 0.92rem; opacity: 0.92; margin: 0; }
+
+.stack-card.is-active   { opacity: 1; pointer-events: auto; transform: translateX(0) scale(1) rotate(0deg); z-index: 3; }
+.stack-card.is-prev     { opacity: 1; transform: translateX(-70px) scale(0.9) rotate(-8deg); z-index: 2; }
+.stack-card.is-next     { opacity: 1; transform: translateX(70px) scale(0.9) rotate(8deg); z-index: 2; }
+.stack-card.is-far-prev { opacity: 1; transform: translateX(-120px) scale(0.8) rotate(-14deg); z-index: 1; }
+.stack-card.is-far-next { opacity: 1; transform: translateX(120px) scale(0.8) rotate(14deg); z-index: 1; }
+
+/* static color rotation, repeats every 4 cards */
+.stack-card:nth-child(4n+1) { background: #4472c4; } /* blue */
+.stack-card:nth-child(4n+2) { background: #2f7a45; } /* green */
+.stack-card:nth-child(4n+3) { background: #b5482f; } /* red/terracotta */
+.stack-card:nth-child(4n+4) { background: #d4a017; } /* gold */
+
+.stack-arrow {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px; height: 40px;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.stack-prev { margin-right: 16px; }
+.stack-next { margin-left: 16px; }
+</style>

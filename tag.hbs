@@ -1,0 +1,153 @@
+{{!< default}}
+
+<section class="success-stories-archive">
+
+    <!-- =====================================================
+         SUCCESS STORIES HERO
+         ===================================================== -->
+
+    <header class="success-stories-hero">
+
+        <div class="success-stories-hero-inner">
+
+            <nav class="success-stories-breadcrumb" aria-label="Breadcrumb">
+
+                <a href="{{@site.url}}/">
+                    Home
+                </a>
+
+                <span>/</span>
+
+                <span>
+                    Tag
+                </span>
+
+            </nav>
+
+            <h1>
+                Success Stories
+            </h1>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SUCCESS STORIES
+         ===================================================== -->
+
+    <section class="success-stories-content">
+
+        <div class="success-stories-wrap">
+
+            <div class="success-stories-grid">
+
+                {{#foreach posts}}
+
+                    <article class="success-story-card">
+
+                        {{#if feature_image}}
+
+                            <a
+                                class="success-story-image"
+                                href="{{url}}"
+                                aria-label="Read {{title}}"
+                            >
+
+                                <img
+                                    src="{{img_url feature_image size="m"}}"
+                                    alt="{{title}}"
+                                >
+
+                                <span class="success-story-label">
+                                    SUCCESS STORIES
+                                </span>
+
+                            </a>
+
+                        {{else}}
+
+                            <a
+                                class="success-story-image success-story-image-empty"
+                                href="{{url}}"
+                                aria-label="Read {{title}}"
+                            >
+
+                                <span class="success-story-label">
+                                    SUCCESS STORIES
+                                </span>
+
+                            </a>
+
+                        {{/if}}
+
+
+                        <div class="success-story-body">
+
+                            <time
+                                class="success-story-date"
+                                datetime="{{date format="YYYY-MM-DD"}}"
+                            >
+                                {{date format="DD MMM YYYY"}}
+                            </time>
+
+
+                            <h2 class="success-story-title">
+
+                                <a href="{{url}}">
+                                    {{title}}
+                                </a>
+
+                            </h2>
+
+
+                            <p class="success-story-excerpt">
+                                {{excerpt words="28"}}
+                            </p>
+
+
+                            <a
+                                class="success-story-read"
+                                href="{{url}}"
+                            >
+
+                                <span>
+                                    Read story
+                                </span>
+
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                {{/foreach}}
+
+            </div>
+
+
+            {{#if pagination.next}}
+
+                <div class="success-stories-pagination">
+
+                    <a
+                        class="success-stories-load-more"
+                        href="{{page_url pagination.next}}"
+                    >
+                        Load more
+                    </a>
+
+                </div>
+
+            {{/if}}
+
+        </div>
+
+    </section>
+
+</section>

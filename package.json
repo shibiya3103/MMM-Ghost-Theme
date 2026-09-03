@@ -1,0 +1,104 @@
+{
+  "author": {
+    "name": "shibiya",
+    "email": "shibiya654@gmail.com",
+    "url": "https://example.com"
+  },
+  "name": "my-ngo-theme",
+  "description": "Fully dynamic Ghost theme, no hardcoded content",
+  "version": "1.0.0",
+  "engines": { "ghost": ">=6.0.0" },
+  "license": "MIT",
+  "keywords": ["ghost-theme", "ngo", "nonprofit"],
+  "config": {
+    "posts_per_page": 9,
+    "card_assets": true,
+    "image_sizes": {
+      "xxs": { "width": 30 },
+      "xs": { "width": 100 },
+      "s": { "width": 300 },
+      "m": { "width": 600 },
+      "l": { "width": 1000 },
+      "xl": { "width": 2000 }
+    },
+    "custom": {
+      "logo": {
+        "type": "image",
+        "description": "Header & footer logo"
+      },
+      "about_image_1": {
+        "type": "image",
+        "description": "Home About collage - image 1 (tall, left)"
+      },
+      "about_image_2": {
+        "type": "image",
+        "description": "Home About collage - image 2 (top right)"
+      },
+      "about_image_3": {
+        "type": "image",
+        "description": "Home About collage - image 3 (bottom right)"
+      },
+      "color_primary": {
+        "type": "color",
+        "default": "#1A4FA0"
+      },
+      "color_accent": {
+        "type": "color",
+        "default": "#B5462E"
+      },
+      "color_ink": {
+        "type": "color",
+        "default": "#16203A"
+      },
+      "founded_year": {
+        "type": "text",
+        "default": "1979"
+      },
+      "years_of_services": {
+        "type": "text",
+        "default": "45",
+        "description": "Years of Service"
+      },
+      "villages_reached": {
+        "type": "text",
+        "default": "191",
+        "description": "Villages Reached"
+      },
+      "mental_health_patients": {
+        "type": "text",
+        "default": "5723",
+        "description": "Mental Health Patients (plain digits, no commas — comma formatting is added automatically)"
+      },
+      "children_cared_for": {
+        "type": "text",
+        "default": "138",
+        "description": "Children Cared For"
+      },
+      "donate_cta_url": {
+        "type": "text",
+        "default": "/donate/",
+        "description": "URL for the Donate button"
+      },
+      "womens_self_help_groups": {
+        "type": "text",
+        "default": "33",
+        "description": "Women's Self-help Groups"
+      },
+      "flood_affected_households": {
+        "type": "text",
+        "default": "17600",
+        "description": "Flood-affected Households Reached (plain digits — the + and comma are added automatically)"
+      },
+      "family_counselling_cases": {
+        "type": "text",
+        "default": "3460",
+        "description": "Family Counselling Cases Settled (plain digits — comma added automatically)"
+      },
+      "dedicated_staff_volunteers": {
+        "type": "text",
+        "default": "40",
+        "description": "Dedicated Staff & Volunteers"
+      }
+    }
+  }
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{meta_title}}</title>
+
+    <link
+        rel="icon"
+        href="{{@site.icon}}"
+    >
+
+    <link
+        rel="canonical"
+        href="{{url absolute="true"}}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{asset "css/screen.css"}}"
+    >
+
+    <style>
+        :root {
+            --c-primary: {{@custom.color_primary}};
+            --c-accent: {{@custom.color_accent}};
+            --c-ink: {{@custom.color_ink}};
+        }
+    </style>
+
+    {{ghost_head}}
+
+</head>
+
+
+<body class="{{body_class}}">
+
+
+    {{!-- =====================================================
+         HEADER
+         ===================================================== --}}
+
+    {{> "header"}}
+
+
+    {{!-- =====================================================
+         MAIN CONTENT
+         ===================================================== --}}
+
+    <main id="site-main">
+
+        {{{body}}}
+
+    </main>
+
+
+    {{!-- =====================================================
+         FOOTER
+         Pass the Ghost primary navigation to footer
+         ===================================================== --}}
+
+    {{> "footer" navigation=navigation}}
+
+
+    {{!-- =====================================================
+         MAIN JAVASCRIPT
+         ===================================================== --}}
+
+    <script
+        src="{{asset "js/main.js"}}"
+        defer
+    ></script>
+
+
+    {{!-- =====================================================
+         COUNT-UP ANIMATION
+         ===================================================== --}}
+
+    <script>
+
+        (function () {
+
+            function animateCount(el) {
+
+                var target =
+                    parseInt(
+                        el.getAttribute('data-count'),
+                        10
+                    ) || 0;
+
+                var suffix =
+                    el.getAttribute('data-suffix') || '';
+
+                var duration = 1500;
+                var start = null;
+
+
+                function step(timestamp) {
+
+                    if (!start) {
+                        start = timestamp;
+                    }
+
+                    var progress =
+                        Math.min(
+                            (timestamp - start) / duration,
+                            1
+                        );
+
+                    var eased =
+                        1 - Math.pow(1 - progress, 3);
+
+                    var value =
+                        Math.floor(eased * target);
+
+
+                    el.textContent =
+                        value.toLocaleString('en-IN')
+                        + suffix;
+
+
+                    if (progress < 1) {
+
+                        requestAnimationFrame(step);
+
+                    } else {
+
+                        el.textContent =
+                            target.toLocaleString('en-IN')
+                            + suffix;
+
+                    }
+
+                }
+
+
+                requestAnimationFrame(step);
+
+            }
+
+
+            var counters =
+                document.querySelectorAll('[data-count]');
+
+
+            if (!counters.length) {
+                return;
+            }
+
+
+            if (!('IntersectionObserver' in window)) {
+
+                counters.forEach(animateCount);
+
+                return;
+
+            }
+
+
+            var observer =
+                new IntersectionObserver(
+
+                    function (entries) {
+
+                        entries.forEach(
+
+                            function (entry) {
+
+                                if (entry.isIntersecting) {
+
+                                    animateCount(
+                                        entry.target
+                                    );
+
+                                    observer.unobserve(
+                                        entry.target
+                                    );
+
+                                }
+
+                            }
+
+                        );
+
+                    },
+
+                    {
+                        threshold: 0.4
+                    }
+
+                );
+
+
+            counters.forEach(
+
+                function (el) {
+
+                    observer.observe(el);
+
+                }
+
+            );
+
+        })();
+
+    </script>
+
+
+    {{ghost_foot}}
+
+</body>
+
+</html>

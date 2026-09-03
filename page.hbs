@@ -1,0 +1,19 @@
+{{!< default}}
+
+<article class="page">
+    {{#if @page.show_title_and_feature_image}}
+    <header class="page-header{{#unless feature_image}} is-plain{{/unless}}"
+        {{#if feature_image}}style="background-image:url('{{img_url feature_image size="xl"}}')"{{/if}}>
+        <div class="wrap">
+            <h1>{{title}}</h1>
+            {{#if custom_excerpt}}<p class="page-lead">{{custom_excerpt}}</p>{{/if}}
+        </div>
+    </header>
+    {{/if}}
+
+    <div class="wrap page-body prose">
+        {{content}}
+    </div>
+</article>
+
+{{> "cta"}}
