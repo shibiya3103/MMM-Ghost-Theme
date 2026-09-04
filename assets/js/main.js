@@ -1,25 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* ---------- Mobile menu ---------- */
-    var toggle = document.getElementById('menuToggle');
-    var mobileNav = document.getElementById('mobileNav');
-    var closeBtn = document.getElementById('mobileNavClose');
-
-    if (toggle && mobileNav) {
-        toggle.addEventListener('click', function () {
-            mobileNav.classList.add('is-open');
-            mobileNav.setAttribute('aria-hidden', 'false');
-            toggle.setAttribute('aria-expanded', 'true');
-        });
-    }
-    if (closeBtn && mobileNav) {
-        closeBtn.addEventListener('click', function () {
-            mobileNav.classList.remove('is-open');
-            mobileNav.setAttribute('aria-hidden', 'true');
-            if (toggle) toggle.setAttribute('aria-expanded', 'false');
-        });
-    }
-
     /* ---------- Hero slider (auto-advance + dots + arrows) ---------- */
     var slider = document.getElementById('heroSlider');
     if (slider) {
@@ -35,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
             slides[current].classList.remove('is-active');
             if (dots[current]) dots[current].classList.remove('is-active');
 
-            // restart the zoom animation on the new slide by forcing reflow
             var bg = slides[current].querySelector('.hero-slide-bg');
             if (bg) {
                 bg.style.animation = 'none';
@@ -48,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var newBg = slides[current].querySelector('.hero-slide-bg');
             if (newBg) {
-                // force reflow so the animation restarts every time this slide becomes active
                 void newBg.offsetWidth;
                 newBg.style.animation = '';
             }
@@ -106,10 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (form && note) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-            // NOTE: this only shows a success message locally.
-            // To actually receive submissions, connect this form to a
-            // backend endpoint (e.g. Formspree, a webhook, or your own API)
-            // and send the form data there before showing the note.
             note.hidden = false;
             form.reset();
         });
@@ -130,7 +104,7 @@ if (siteHeader) {
 // Desktop dropdown: click toggle (in addition to CSS hover)
 document.querySelectorAll('.nav-build .has-sub > a').forEach((link) => {
     link.addEventListener('click', function (e) {
-        if (window.innerWidth <= 900) return; // handled by drawer on mobile
+        if (window.innerWidth <= 900) return;
         const parent = link.closest('.has-sub');
         const isOpen = parent.classList.contains('js-open');
         document.querySelectorAll('.nav-build .has-sub.js-open').forEach((el) => {
@@ -151,41 +125,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Mobile drawer open/close
-const navToggle = document.getElementById('navToggle');
-const drawer = document.getElementById('mobileDrawer');
-const drawerClose = document.getElementById('drawerClose');
-
-function openDrawer() {
-    drawer.classList.add('open');
-    navToggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-}
-function closeDrawer() {
-    drawer.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-}
-
-if (navToggle && drawer) {
-    navToggle.addEventListener('click', openDrawer);
-}
-if (drawerClose) {
-    drawerClose.addEventListener('click', closeDrawer);
-}
-if (drawer) {
-    drawer.addEventListener('click', (e) => {
-        if (e.target === drawer) closeDrawer();
-    });
-}
-
-// Mobile submenu accordion inside drawer
-document.querySelectorAll('.mobile-drawer .has-sub > a').forEach((link) => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault();
-        link.closest('.has-sub').classList.toggle('open');
-    });
-});
 document.addEventListener('DOMContentLoaded', function () {
     var aboutSplit = document.querySelector('.about-split');
     if (aboutSplit) {
@@ -200,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
 /* =========================================================
    IMPACT PAGE — ANIMATED STAT NUMBERS
    ========================================================= */
@@ -216,17 +156,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         counters.forEach(function (counter) {
 
-            const target = parseInt(
-                counter.dataset.count,
-                10
-            );
+            const target = parseInt(counter.dataset.count, 10);
 
             if (isNaN(target)) {
                 return;
             }
 
-            const hasPlus =
-                counter.dataset.plus === 'true';
+            const hasPlus = counter.dataset.plus === 'true';
 
             const duration = 1800;
             const start = performance.now();
@@ -236,36 +172,18 @@ document.addEventListener('DOMContentLoaded', function () {
             function update(currentTime) {
 
                 const elapsed = currentTime - start;
-
-                const progress = Math.min(
-                    elapsed / duration,
-                    1
-                );
-
-                /*
-                 * Smooth ease-out animation
-                 */
-                const eased =
-                    1 - Math.pow(1 - progress, 3);
-
-                const current = Math.floor(
-                    target * eased
-                );
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(target * eased);
 
                 counter.textContent =
-                    current.toLocaleString('en-IN') +
-                    (hasPlus ? '+' : '');
+                    current.toLocaleString('en-IN') + (hasPlus ? '+' : '');
 
                 if (progress < 1) {
-
                     requestAnimationFrame(update);
-
                 } else {
-
                     counter.textContent =
-                        target.toLocaleString('en-IN') +
-                        (hasPlus ? '+' : '');
-
+                        target.toLocaleString('en-IN') + (hasPlus ? '+' : '');
                 }
             }
 
@@ -273,51 +191,27 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    document.addEventListener('DOMContentLoaded', function () {
 
-    /*
-     * Start when the page loads
-     */
-    document.addEventListener(
-        'DOMContentLoaded',
-        function () {
+        const section = document.querySelector('.impact-stats-section');
 
-            const section =
-                document.querySelector('.impact-stats-section');
-
-            if (!section) {
-                return;
-            }
-
-            /*
-             * Start when stats enter the screen
-             */
-            const observer =
-                new IntersectionObserver(
-                    function (entries, observer) {
-
-                        entries.forEach(function (entry) {
-
-                            if (entry.isIntersecting) {
-
-                                startImpactCounters();
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
-
-                        });
-
-                    },
-                    {
-                        threshold: 0.25
-                    }
-                );
-
-            observer.observe(section);
-
+        if (!section) {
+            return;
         }
-    );
+
+        const observer = new IntersectionObserver(
+            function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        startImpactCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.25 }
+        );
+
+        observer.observe(section);
+    });
 
 })();

@@ -9460,3 +9460,1085 @@ p{ margin:0 0 1em; }
     }
 
 }
+/* ===== NEWS PAGE HERO ===== */
+.news-page-hero {
+    background: linear-gradient(135deg, #0a1233, #101a45);
+    padding: 60px 0 70px;
+    color: #fff;
+}
+
+.news-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.news-breadcrumb {
+    font-size: 14px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.news-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.news-breadcrumb span {
+    margin: 0 6px;
+}
+
+.news-page-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.news-page-hero p {
+    font-size: 17px;
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0;
+}
+
+/* ===== STORIES SECTION ===== */
+.news-stories-section {
+    background: #fff;
+    padding: 60px 0;
+}
+
+.news-stories-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.news-stories-heading {
+    margin-bottom: 36px;
+}
+
+.news-stories-eyebrow {
+    color: #e8592d;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.news-stories-heading h2 {
+    font-size: 32px;
+    margin: 8px 0 8px;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.news-stories-heading p {
+    color: #666;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* ===== GRID + CARDS ===== */
+.news-stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+@media (max-width: 900px) {
+    .news-stories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .news-stories-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.news-story-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-story-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.news-story-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #eee;
+}
+
+.news-story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-story-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #e5e5e5;
+}
+
+.news-story-content {
+    padding: 20px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.news-story-date {
+    color: #e8592d;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.news-story-content h3 {
+    margin: 0 0 10px;
+    font-size: 19px;
+    line-height: 1.3;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.news-story-content h3 a {
+    color: #12193f;
+    text-decoration: none;
+}
+
+.news-story-content p {
+    color: #666;
+    font-size: 14.5px;
+    line-height: 1.55;
+    margin: 0 0 16px;
+    flex-grow: 1;
+}
+
+.news-story-link {
+    color: #1a4fd6;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.news-story-link:hover {
+    text-decoration: underline;
+}
+
+/* ===== EMPTY STATE ===== */
+.news-empty {
+    padding: 80px 0;
+    text-align: center;
+    color: #666;
+}
+/* ===== MOBILE DRAWER ===== */
+
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 15, 30, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 998;
+}
+
+.drawer-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: min(88%, 380px);
+    background: #fff;
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.18);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 28px 32px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+.mobile-drawer.is-open {
+    transform: translateX(0);
+}
+
+.drawer-close {
+    align-self: flex-end;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--c-ink);
+    cursor: pointer;
+    margin-bottom: 24px;
+    padding: 0;
+}
+
+.drawer-close svg {
+    width: 22px;
+    height: 22px;
+}
+
+.drawer-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer-item {
+    border-bottom: 1px solid var(--c-border);
+}
+
+.drawer-item:first-child {
+    border-top: 1px solid var(--c-border);
+}
+
+.drawer-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 2px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--c-ink);
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.drawer-caret {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.drawer-has-sub.is-open .drawer-caret {
+    transform: rotate(180deg);
+}
+
+.drawer-submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+}
+
+.drawer-has-sub.is-open .drawer-submenu {
+    max-height: 400px;
+}
+
+.drawer-submenu li a {
+    display: block;
+    padding: 12px 2px 12px 14px;
+    color: #555;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.drawer-submenu li a:hover {
+    color: var(--c-primary);
+}
+
+.drawer-donate {
+    margin-top: auto;
+    padding-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    padding: 16px 24px;
+    border-radius: 999px;
+}
+
+@media (min-width: 901px) {
+    .mobile-drawer,
+    .drawer-overlay {
+        display: none;
+    }
+}
+/* =========================================================
+   OUTLINE BUTTON WITH CIRCLE ARROW
+   Used by: Learn more about us, See our full impact,
+   View All Programmes
+   ========================================================= */
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 6px 6px 6px 26px;
+
+    border-radius: 999px;
+    border: 1px solid var(--c-border);
+    background: #fff;
+
+    color: var(--c-ink);
+
+    font-weight: 600;
+    font-size: 0.95rem;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-outline:hover {
+    border-color: var(--c-primary);
+    box-shadow: 0 8px 20px rgba(26, 79, 160, 0.12);
+}
+
+/* Text label (first span) */
+.btn-outline > span:first-child {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--c-ink);
+}
+
+/* Circle arrow (second span, aria-hidden) */
+.btn-outline > span[aria-hidden="true"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    background: var(--c-primary);
+    color: #fff;
+
+    font-size: 16px;
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.btn-outline:hover > span[aria-hidden="true"] {
+    background: var(--c-accent);
+    transform: translateX(3px);
+}
+/* =========================================================
+   LEARN MORE ABOUT US — plain arrow, no circle
+   ========================================================= */
+
+.about-learn-more > span[aria-hidden="true"] {
+    background: none;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+
+    color: var(--c-primary);
+    font-size: 20px;
+}
+
+.about-learn-more:hover > span[aria-hidden="true"] {
+    background: none;
+    color: var(--c-accent);
+    transform: translateX(3px);
+}
+
+/* =========================================================
+   FINAL RESPONSIVE FIXES
+   ---------------------------------------------------------
+   These rules are intentionally placed at the very end of
+   the stylesheet so they override duplicate/earlier rules.
+   They fix mobile/tablet overflow and grid collapsing.
+   ========================================================= */
+
+/* ---------- Global safety ---------- */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+iframe {
+    max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+    max-width: 100%;
+}
+
+.wrap,
+.wrap-narrow,
+.header-row,
+.news-hero-inner,
+.news-stories-wrap,
+.success-stories-wrap,
+.success-stories-hero-inner {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* ---------- Header / mobile navigation ---------- */
+
+@media (max-width: 900px) {
+
+    .site-header {
+        padding: 14px 0;
+    }
+
+    .header-row {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .header-bar {
+        width: 100%;
+        min-width: 0;
+        padding: 8px 10px 8px 14px;
+        border-radius: 18px;
+        gap: 8px;
+    }
+
+    .brand {
+        min-width: 0;
+        margin: 0;
+    }
+
+    .brand img {
+        height: 40px;
+        max-width: 150px;
+    }
+
+    .brand-text {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .header-actions {
+        min-width: 0;
+        margin-left: auto;
+        gap: 8px;
+    }
+
+    .btn-donate {
+        padding: 9px 14px;
+        font-size: .88rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+        width: 40px;
+        height: 40px;
+    }
+
+    /* The desktop/inline navigation must never force width on mobile. */
+    .nav {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .nav-link,
+    .dropdown-toggle {
+        white-space: normal;
+    }
+}
+
+
+/* ---------- Generic grids ---------- */
+
+@media (max-width: 900px) {
+
+    .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-grid,
+    .impact-overview-grid,
+    .donate-grid,
+    .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mission-grid,
+    .activity-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .leader-card {
+        grid-template-columns: 180px minmax(0, 1fr);
+    }
+
+    .team-grid,
+    .team-grid-sm {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .donate-grid-band {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .event-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .nl-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .involve-cards,
+    .get-involved-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .success-stories-grid,
+    .success-more-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .news-stories-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .program-grid-all {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .program-grid-all .program-card {
+        grid-column: span 1 !important;
+    }
+
+}
+
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 650px) {
+
+    .wrap,
+    .wrap-narrow {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .section {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .section-head {
+        margin-bottom: 30px;
+    }
+
+    .section-description {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    /* One-column layout on phones. */
+    .grid-3,
+    .about-grid,
+    .mission-grid,
+    .activity-grid,
+    .event-grid,
+    .nl-grid,
+    .team-grid,
+    .team-grid-sm,
+    .contact-grid,
+    .donate-grid,
+    .donate-grid-band,
+    .success-stories-grid,
+    .success-more-grid,
+    .news-stories-grid,
+    .program-grid,
+    .program-grid-large,
+    .program-grid-small,
+    .program-grid-all,
+    .involve-cards,
+    .get-involved-cards,
+    .quote-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .program-grid-all .program-card,
+    .program-grid-all .program-card:nth-child(1),
+    .program-grid-all .program-card:nth-child(2),
+    .program-grid-all .program-card:nth-child(3),
+    .program-grid-all .program-card:nth-child(4),
+    .program-grid-all .program-card:nth-child(5) {
+        grid-column: span 1 !important;
+        min-width: 0;
+    }
+
+    /* ---------- Testimonials ----------
+       The original stylesheet defines .quote-grid with 3 columns
+       again after an earlier mobile rule. This final rule wins. */
+    .testimonials {
+        padding: 58px 0;
+        overflow: hidden;
+    }
+
+    .testimonials-head {
+        width: 100%;
+        margin-bottom: 30px;
+        padding: 0 4px;
+    }
+
+    .testimonials-head h2 {
+        font-size: clamp(1.8rem, 8vw, 2.2rem);
+    }
+
+    .quote-grid {
+        width: 100%;
+        min-width: 0;
+        gap: 18px;
+    }
+
+    .quote-card {
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+        padding: 26px 22px 24px;
+    }
+
+    .quote-card blockquote {
+        font-size: .98rem;
+        overflow-wrap: anywhere;
+    }
+
+    .quote-person {
+        min-width: 0;
+    }
+
+    .quote-person strong {
+        overflow-wrap: anywhere;
+    }
+
+
+    /* ---------- Stories ---------- */
+
+    .stories-transform {
+        padding: 58px 0;
+        overflow: hidden;
+    }
+
+    .stories-head {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        margin-bottom: 30px;
+    }
+
+    .stories-heading h2 {
+        font-size: clamp(1.8rem, 8vw, 2.2rem);
+    }
+
+    .stories-view-all,
+    .stories-all-button {
+        align-self: flex-start;
+        max-width: 100%;
+    }
+
+    .stories-grid {
+        grid-template-columns: 1fr !important;
+        min-width: 0;
+    }
+
+
+    /* ---------- Programmes ---------- */
+
+    .program-card,
+    .program-card-content {
+        min-width: 0;
+    }
+
+    .program-grid-all .program-media,
+    .program-card-large .program-media,
+    .program-card-small .program-media {
+        width: 100%;
+        height: auto;
+        min-height: 200px;
+        aspect-ratio: 16 / 10 !important;
+    }
+
+    .program-card-content {
+        padding: 20px 18px 18px;
+    }
+
+
+    /* ---------- About collage ---------- */
+
+    .about-media {
+        width: 100%;
+        max-width: 100%;
+        height: 360px;
+        min-width: 0;
+    }
+
+    .about-badge {
+        right: 4px;
+        bottom: 24px;
+        width: 100px;
+        height: 78px;
+    }
+
+    .about-badge b {
+        font-size: 25px;
+    }
+
+
+    /* ---------- Stats ---------- */
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px;
+    }
+
+    .stat-cell {
+        min-width: 0;
+        padding: 16px 10px;
+    }
+
+    .stat-num {
+        font-size: 1.55rem;
+    }
+
+    .ribbon-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .ribbon-item {
+        min-width: 0;
+        padding: 10px 8px;
+    }
+
+
+    /* ---------- Impact ---------- */
+
+    .impact-grid,
+    .impact-count-grid {
+        grid-template-columns: 1fr !important;
+        min-width: 0;
+    }
+
+    .impact-cell {
+        border-right: none;
+    }
+
+    .impact-cell:not(:last-child) {
+        border-bottom: 1px solid var(--c-border);
+    }
+
+    .impact-cell:last-child {
+        border-bottom: none;
+    }
+
+    .impact-num {
+        font-size: 2rem;
+    }
+
+
+    /* ---------- Footer ---------- */
+
+    .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px;
+    }
+
+    .footer-description {
+        max-width: 100%;
+    }
+
+    .footer-bar-inner {
+        gap: 14px;
+    }
+
+
+    /* ---------- CTA ---------- */
+
+    .cta-card {
+        padding: 40px 22px;
+    }
+
+    .cta-actions {
+        width: 100%;
+    }
+
+    .cta-actions .btn {
+        max-width: 100%;
+    }
+
+
+    /* ---------- Forms ---------- */
+
+    .form-field,
+    .contact-form-box,
+    .contact-form-card,
+    .contact-info,
+    .contact-map {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .phone-input {
+        max-width: 100%;
+    }
+
+    .phone-input input {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .contact-submit {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* ---------- Legal registration table ---------- */
+
+    .legal-registration-row {
+        grid-template-columns: 1fr !important;
+    }
+
+    .legal-registration-info {
+        border-right: 0 !important;
+        border-bottom: 1px solid #dce4f0;
+    }
+
+
+    /* ---------- Get involved ---------- */
+
+    .get-involved-cards {
+        grid-template-columns: 1fr !important;
+        min-height: 0;
+        border-radius: 18px;
+    }
+
+    .get-involved-card {
+        min-height: 280px;
+        padding: 34px 22px;
+    }
+
+
+    /* ---------- Success stories / news ---------- */
+
+    .success-stories-grid,
+    .success-more-grid,
+    .news-stories-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+
+    .success-story-card,
+    .news-story-card {
+        min-width: 0;
+    }
+
+    .success-story-title,
+    .news-story-card h3 {
+        overflow-wrap: anywhere;
+    }
+
+    .news-story-image {
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+
+    /* ---------- Ghost cards / editor content ---------- */
+
+    .post-card,
+    .prose,
+    .kg-card,
+    .kg-width-wide,
+    .kg-width-full {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .prose {
+        overflow-wrap: anywhere;
+    }
+
+    .kg-width-full {
+        width: 100%;
+        left: auto;
+        right: auto;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .kg-width-full img,
+    .kg-width-wide img {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+    /* ---------- Navigation drawer ---------- */
+
+    .mobile-drawer {
+        width: min(88vw, 380px);
+        max-width: 100vw;
+        padding: 22px 20px 28px;
+    }
+
+    .drawer-link {
+        font-size: 1rem;
+        padding: 16px 2px;
+    }
+
+    .drawer-submenu li a {
+        font-size: .95rem;
+    }
+
+}
+
+
+/* ---------- Very small phones ---------- */
+
+@media (max-width: 420px) {
+
+    .wrap,
+    .wrap-narrow {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .header-row {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .header-bar {
+        padding-left: 10px;
+        padding-right: 8px;
+    }
+
+    .brand img {
+        height: 36px;
+        max-width: 125px;
+    }
+
+    .brand-text {
+        font-size: 1rem;
+        max-width: 120px;
+    }
+
+    .btn-donate {
+        padding: 8px 11px;
+        font-size: .82rem;
+    }
+
+    .menu-toggle {
+        width: 38px;
+        height: 38px;
+    }
+
+    .hero-inner {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .hero-inner h1 {
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
+    }
+
+    .hero-inner p {
+        font-size: 1rem;
+    }
+
+    .hero-cta {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .about-media {
+        height: 320px;
+    }
+
+    .quote-card {
+        padding: 24px 20px 22px;
+    }
+
+    .quote-card blockquote {
+        font-size: .95rem;
+    }
+
+    .cta-card {
+        padding: 34px 18px;
+    }
+
+    .page-hero,
+    .page-header {
+        padding-top: 90px;
+        padding-bottom: 48px;
+    }
+
+}

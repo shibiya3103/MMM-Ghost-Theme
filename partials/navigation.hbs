@@ -13,6 +13,7 @@
 </nav>
 
 <script>
+document.addEventListener('DOMContentLoaded', function () {
 (function () {
     var list = document.getElementById('primaryNavList');
     if (!list) return;
@@ -37,60 +38,37 @@
 
             if (!groups[groupName]) {
                 groups[groupName] = [];
-                order.push({
-                    type: 'group',
-                    name: groupName
-                });
+                order.push({ type: 'group', name: groupName });
             }
 
-            groups[groupName].push({
-                name: childName,
-                url: url
-            });
+            groups[groupName].push({ name: childName, url: url });
 
         } else {
-            order.push({
-                type: 'link',
-                name: label,
-                url: url
-            });
+            order.push({ type: 'link', name: label, url: url });
         }
     });
 
+    /* ---------- Build DESKTOP nav ---------- */
     order.forEach(function (entry) {
         var li = document.createElement('li');
 
         if (entry.type === 'link') {
 
             li.className = 'nav-item';
-
             li.innerHTML =
-                '<a class="nav-link" href="' +
-                entry.url +
-                '">' +
-                entry.name +
-                '</a>';
+                '<a class="nav-link" href="' + entry.url + '">' + entry.name + '</a>';
 
         } else {
 
             li.className = 'nav-item has-dropdown';
-
             li.innerHTML =
                 '<button class="nav-link dropdown-toggle" type="button" aria-expanded="false">' +
-                    entry.name +
-                    ' <span class="caret" aria-hidden="true">▾</span>' +
+                    entry.name + ' <span class="caret" aria-hidden="true">▾</span>' +
                 '</button>' +
-
                 '<ul class="dropdown-menu">' +
-
                     groups[entry.name].map(function (child) {
-                        return '<li><a href="' +
-                            child.url +
-                            '">' +
-                            child.name +
-                            '</a></li>';
+                        return '<li><a href="' + child.url + '">' + child.name + '</a></li>';
                     }).join('') +
-
                 '</ul>';
         }
 
@@ -99,16 +77,14 @@
 
     list.addEventListener('click', function (e) {
         var toggle = e.target.closest('.dropdown-toggle');
-
         if (!toggle) return;
 
         var parentLi = toggle.closest('.has-dropdown');
         var wasOpen = parentLi.classList.contains('is-open');
 
-        list.querySelectorAll('.has-dropdown.is-open')
-            .forEach(function (openLi) {
-                openLi.classList.remove('is-open');
-            });
+        list.querySelectorAll('.has-dropdown.is-open').forEach(function (openLi) {
+            openLi.classList.remove('is-open');
+        });
 
         if (!wasOpen) {
             parentLi.classList.add('is-open');
@@ -118,19 +94,73 @@
         }
     });
 
-    var menuToggle = document.getElementById('menuToggle');
-    var headerBar = document.querySelector('.header-bar');
+    /* ---------- Build MOBILE DRAWER nav ---------- */
+    var drawerList = document.getElementById('drawerNavList');
 
-    if (menuToggle && headerBar) {
-        menuToggle.addEventListener('click', function () {
-            var isOpen = headerBar.classList.toggle('is-open');
+    if (drawerList) {
+        order.forEach(function (entry) {
+            var li = document.createElement('li');
 
-            menuToggle.setAttribute(
-                'aria-expanded',
-                isOpen ? 'true' : 'false'
-            );
+            if (entry.type === 'link') {
+
+                li.className = 'drawer-item';
+                li.innerHTML =
+                    '<a class="drawer-link" href="' + entry.url + '">' + entry.name + '</a>';
+
+            } else {
+
+                li.className = 'drawer-item drawer-has-sub';
+                li.innerHTML =
+                    '<button class="drawer-link drawer-sub-toggle" type="button" aria-expanded="false">' +
+                        '<span>' + entry.name + '</span>' +
+                        '<svg class="drawer-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                    '</button>' +
+                    '<ul class="drawer-submenu">' +
+                        groups[entry.name].map(function (child) {
+                            return '<li><a href="' + child.url + '">' + child.name + '</a></li>';
+                        }).join('') +
+                    '</ul>';
+            }
+
+            drawerList.appendChild(li);
+        });
+
+        drawerList.addEventListener('click', function (e) {
+            var toggle = e.target.closest('.drawer-sub-toggle');
+            if (!toggle) return;
+
+            var parentLi = toggle.closest('.drawer-has-sub');
+            var isOpen = parentLi.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
     }
 
+    /* ---------- Drawer open/close ---------- */
+    var menuToggle = document.getElementById('menuToggle');
+    var drawer = document.getElementById('mobileDrawer');
+    var overlay = document.getElementById('drawerOverlay');
+    var closeBtn = document.getElementById('drawerClose');
+
+    function openDrawer() {
+        drawer.classList.add('is-open');
+        overlay.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeDrawer() {
+        drawer.classList.remove('is-open');
+        overlay.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    if (menuToggle) menuToggle.addEventListener('click', openDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (overlay) overlay.addEventListener('click', closeDrawer);
+
 })();
+});
 </script>
